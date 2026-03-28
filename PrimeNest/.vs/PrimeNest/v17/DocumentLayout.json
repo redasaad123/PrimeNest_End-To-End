@@ -1,0 +1,311 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects Of C#\\PrimeNest\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\projectapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\projectapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79094D89-7204-4B1B-B5BC-AA56C517891B}|Infrastructure\\Infrastructure.csproj|d:\\projects of c#\\primenest\\infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{79094D89-7204-4B1B-B5BC-AA56C517891B}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{633FD41B-D9C2-4225-B4AE-C3B9CC731F57}|Core\\Core.csproj|d:\\projects of c#\\primenest\\core\\core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{633FD41B-D9C2-4225-B4AE-C3B9CC731F57}|Core\\Core.csproj|solutionrelative:core\\core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\services\\propertyservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\services\\propertyservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\areafilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\areafilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\datefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\datefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\keywordfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\keywordfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\locationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\locationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\pricefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\pricefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\propertyfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\propertyfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\typecontractfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\typecontractfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\chainofresponsibility\\typefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\typefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\controllers\\authenticatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\controllers\\authenticatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79094D89-7204-4B1B-B5BC-AA56C517891B}|Infrastructure\\Infrastructure.csproj|d:\\projects of c#\\primenest\\infrastructure\\migrations\\20250628141355_rr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79094D89-7204-4B1B-B5BC-AA56C517891B}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250628141355_rr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SearchService.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\SearchService.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\Services\\SearchService.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\SearchService.cs",
+              "RelativeToolTip": "ProjectApi\\Services\\SearchService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:55:49.505Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImageService.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\ImageService.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\Services\\ImageService.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\ImageService.cs",
+              "RelativeToolTip": "ProjectApi\\Services\\ImageService.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwDgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:55:42.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TypeFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\TypeFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\TypeFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\TypeFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\TypeFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:55.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TypeContractFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\TypeContractFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\TypeContractFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\TypeContractFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\TypeContractFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:54.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PropertyFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\PropertyFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\PropertyFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\PropertyFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\PropertyFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:53.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PriceFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\PriceFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\PriceFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\PriceFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\PriceFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:52.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LocationFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\LocationFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\LocationFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\LocationFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\LocationFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:51.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "KeywordFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\KeywordFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\KeywordFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\KeywordFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\KeywordFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:50.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DateFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\DateFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\DateFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\DateFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\DateFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:49.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AreaFilter.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\AreaFilter.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\AreaFilter.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\AreaFilter.cs",
+              "RelativeToolTip": "ProjectApi\\ChainOfResponsibility\\AreaFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:53:46.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\appsettings.json",
+              "RelativeDocumentMoniker": "ProjectApi\\appsettings.json",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\appsettings.json",
+              "RelativeToolTip": "ProjectApi\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-28T14:13:03.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PropertyServices.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\PropertyServices.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\Services\\PropertyServices.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\PropertyServices.cs",
+              "RelativeToolTip": "ProjectApi\\Services\\PropertyServices.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T22:55:45.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Core.csproj",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj",
+              "RelativeDocumentMoniker": "Core\\Core.csproj",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj",
+              "RelativeToolTip": "Core\\Core.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-18T20:26:45.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AuthenticateController.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Controllers\\AuthenticateController.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\Controllers\\AuthenticateController.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Controllers\\AuthenticateController.cs",
+              "RelativeToolTip": "ProjectApi\\Controllers\\AuthenticateController.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T20:26:24.722Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProjectApi.csproj",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ProjectApi.csproj",
+              "RelativeDocumentMoniker": "ProjectApi\\ProjectApi.csproj",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ProjectApi.csproj",
+              "RelativeToolTip": "ProjectApi\\ProjectApi.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-18T20:24:06.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Infrastructure.csproj",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\Infrastructure\\Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Infrastructure\\Infrastructure.csproj",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\Infrastructure\\Infrastructure.csproj",
+              "RelativeToolTip": "Infrastructure\\Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-18T20:19:40.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "20250628141355_rr.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\Infrastructure\\Migrations\\20250628141355_rr.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250628141355_rr.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\Infrastructure\\Migrations\\20250628141355_rr.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250628141355_rr.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T14:13:56.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Program.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\Program.cs",
+              "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Program.cs",
+              "RelativeToolTip": "ProjectApi\\Program.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAwwIMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T14:12:25.974Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

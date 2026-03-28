@@ -1,0 +1,846 @@
+{
+  "Version": 1,
+  "Hash": "TVYqvwUId+O6XVIiGnfSkrJWFT7wK1zLX4jMm+4dxR8=",
+  "Source": "ProjectApi",
+  "BasePath": "_content/ProjectApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ProjectApi\\wwwroot",
+      "Source": "ProjectApi",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\12d43941a46441cd9780936d1f0fee11.jpg",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/12d43941a46441cd9780936d1f0fee11#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vecn3ia992",
+      "Integrity": "aRYrwPTLV9r1TJUcvJBFgKwzj+zPmVLg8tLLjsVXtJI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\12d43941a46441cd9780936d1f0fee11.jpg"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\4bc011b9161fb6544cfef43b0b5ee421.jpg",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/4bc011b9161fb6544cfef43b0b5ee421#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mwkqz9aqpx",
+      "Integrity": "qiyGTc5Mex3Xpb/HtkNnlGFxk5NUrl/5oxhO4Tgu8Wc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\4bc011b9161fb6544cfef43b0b5ee421.jpg"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-09 015300.png",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/Screenshot 2025-05-09 015300#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3ksuyadjic",
+      "Integrity": "7blTCIdpWhPD6vXLoJthXeo46QIzI4wQSmlM60a4rbA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\Screenshot 2025-05-09 015300.png"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-10 040237.png",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/Screenshot 2025-05-10 040237#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "w4w6c9eg2o",
+      "Integrity": "0Odu8tQt343Vxlm8qRdwjkXhq9jcJTGwc6dtCQEVmMU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\Screenshot 2025-05-10 040237.png"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-10 225819.png",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/Screenshot 2025-05-10 225819#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "tbao7ife3j",
+      "Integrity": "Sanc9SIkX9Jgk0XwGTAs/gp/YJjX2qMaW0NX3sQXdXY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\Screenshot 2025-05-10 225819.png"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-11 000134.png",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/Screenshot 2025-05-11 000134#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "evfod5gv9d",
+      "Integrity": "pnikEDs2yuiEH0Rg/yoX08u40M519a6tHLeRViAi24g=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\Screenshot 2025-05-11 000134.png"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-11 010022.png",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/Screenshot 2025-05-11 010022#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7a3722y5ne",
+      "Integrity": "X/YDn0AYitgHMHbNrkyYnlj0p/lP+bsFONPSp+9uSKM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\Screenshot 2025-05-11 010022.png"
+    },
+    {
+      "Identity": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-12 134611.png",
+      "SourceId": "ProjectApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\",
+      "BasePath": "_content/ProjectApi",
+      "RelativePath": "Photos/Screenshot 2025-05-12 134611#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "uv9syv0a1n",
+      "Integrity": "9iAvd+URqx2broGLVfx6TpswkzrXdR/egjWMK2phO/o=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\Screenshot 2025-05-12 134611.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "Photos/12d43941a46441cd9780936d1f0fee11.jpg",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\12d43941a46441cd9780936d1f0fee11.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24005"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aRYrwPTLV9r1TJUcvJBFgKwzj+zPmVLg8tLLjsVXtJI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 14 Apr 2025 15:44:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aRYrwPTLV9r1TJUcvJBFgKwzj+zPmVLg8tLLjsVXtJI="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/12d43941a46441cd9780936d1f0fee11.vecn3ia992.jpg",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\12d43941a46441cd9780936d1f0fee11.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24005"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aRYrwPTLV9r1TJUcvJBFgKwzj+zPmVLg8tLLjsVXtJI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 14 Apr 2025 15:44:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vecn3ia992"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/12d43941a46441cd9780936d1f0fee11.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aRYrwPTLV9r1TJUcvJBFgKwzj+zPmVLg8tLLjsVXtJI="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/4bc011b9161fb6544cfef43b0b5ee421.jpg",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\4bc011b9161fb6544cfef43b0b5ee421.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20520"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qiyGTc5Mex3Xpb/HtkNnlGFxk5NUrl/5oxhO4Tgu8Wc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 14 Apr 2025 15:44:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qiyGTc5Mex3Xpb/HtkNnlGFxk5NUrl/5oxhO4Tgu8Wc="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/4bc011b9161fb6544cfef43b0b5ee421.mwkqz9aqpx.jpg",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\4bc011b9161fb6544cfef43b0b5ee421.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20520"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qiyGTc5Mex3Xpb/HtkNnlGFxk5NUrl/5oxhO4Tgu8Wc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 14 Apr 2025 15:44:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mwkqz9aqpx"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/4bc011b9161fb6544cfef43b0b5ee421.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qiyGTc5Mex3Xpb/HtkNnlGFxk5NUrl/5oxhO4Tgu8Wc="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-09 015300.3ksuyadjic.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-09 015300.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28395"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7blTCIdpWhPD6vXLoJthXeo46QIzI4wQSmlM60a4rbA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 22:44:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3ksuyadjic"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/Screenshot 2025-05-09 015300.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7blTCIdpWhPD6vXLoJthXeo46QIzI4wQSmlM60a4rbA="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-09 015300.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-09 015300.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28395"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7blTCIdpWhPD6vXLoJthXeo46QIzI4wQSmlM60a4rbA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 22:44:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7blTCIdpWhPD6vXLoJthXeo46QIzI4wQSmlM60a4rbA="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-10 040237.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-10 040237.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "26707"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0Odu8tQt343Vxlm8qRdwjkXhq9jcJTGwc6dtCQEVmMU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 18:29:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0Odu8tQt343Vxlm8qRdwjkXhq9jcJTGwc6dtCQEVmMU="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-10 040237.w4w6c9eg2o.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-10 040237.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "26707"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0Odu8tQt343Vxlm8qRdwjkXhq9jcJTGwc6dtCQEVmMU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 18:29:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w4w6c9eg2o"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/Screenshot 2025-05-10 040237.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0Odu8tQt343Vxlm8qRdwjkXhq9jcJTGwc6dtCQEVmMU="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-10 225819.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-10 225819.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9927"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sanc9SIkX9Jgk0XwGTAs/gp/YJjX2qMaW0NX3sQXdXY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 22:44:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sanc9SIkX9Jgk0XwGTAs/gp/YJjX2qMaW0NX3sQXdXY="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-10 225819.tbao7ife3j.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-10 225819.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9927"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sanc9SIkX9Jgk0XwGTAs/gp/YJjX2qMaW0NX3sQXdXY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 22:44:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tbao7ife3j"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/Screenshot 2025-05-10 225819.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sanc9SIkX9Jgk0XwGTAs/gp/YJjX2qMaW0NX3sQXdXY="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-11 000134.evfod5gv9d.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-11 000134.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7802"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pnikEDs2yuiEH0Rg/yoX08u40M519a6tHLeRViAi24g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 17:54:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "evfod5gv9d"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/Screenshot 2025-05-11 000134.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pnikEDs2yuiEH0Rg/yoX08u40M519a6tHLeRViAi24g="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-11 000134.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-11 000134.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7802"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pnikEDs2yuiEH0Rg/yoX08u40M519a6tHLeRViAi24g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 17:54:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pnikEDs2yuiEH0Rg/yoX08u40M519a6tHLeRViAi24g="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-11 010022.7a3722y5ne.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-11 010022.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17455"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"X/YDn0AYitgHMHbNrkyYnlj0p/lP+bsFONPSp+9uSKM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 17:54:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7a3722y5ne"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/Screenshot 2025-05-11 010022.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-X/YDn0AYitgHMHbNrkyYnlj0p/lP+bsFONPSp+9uSKM="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-11 010022.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-11 010022.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17455"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"X/YDn0AYitgHMHbNrkyYnlj0p/lP+bsFONPSp+9uSKM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 17:54:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-X/YDn0AYitgHMHbNrkyYnlj0p/lP+bsFONPSp+9uSKM="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-12 134611.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-12 134611.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9iAvd+URqx2broGLVfx6TpswkzrXdR/egjWMK2phO/o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 18:29:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9iAvd+URqx2broGLVfx6TpswkzrXdR/egjWMK2phO/o="
+        }
+      ]
+    },
+    {
+      "Route": "Photos/Screenshot 2025-05-12 134611.uv9syv0a1n.png",
+      "AssetFile": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\wwwroot\\Photos\\Screenshot 2025-05-12 134611.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9iAvd+URqx2broGLVfx6TpswkzrXdR/egjWMK2phO/o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 13 May 2025 18:29:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "uv9syv0a1n"
+        },
+        {
+          "Name": "label",
+          "Value": "Photos/Screenshot 2025-05-12 134611.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9iAvd+URqx2broGLVfx6TpswkzrXdR/egjWMK2phO/o="
+        }
+      ]
+    }
+  ]
+}

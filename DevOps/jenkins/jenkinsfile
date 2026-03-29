@@ -22,6 +22,8 @@ pipeline{
         TF_VAR_secret_key       = credentials('secret_key')
         TF_VAR_access_key      = credentials('access_key')
         TF_BIN               = ''
+        ANSIBLE_PLAYBOOK_BIN = 'ansible-playbook'
+        ANSIBLE_BIN          = 'ansible'
 
     }
     stages{
@@ -57,9 +59,24 @@ pipeline{
                     
                     // Ensure ansible is available
                     if (!sh(script: 'command -v ansible-playbook', returnStatus: true).toInteger().equals(0)) {
-                        echo "Ansible not found, please install it or provide it in PATH"
+                        echo "Ansible not found, installing..."
+                        if (sh(script: 'command -v pip3 >/dev/null 2>&1', returnStatus: true) == 0) {
+                            sh 'pip3 install --user ansible-core'
+                            env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
+                        } else if (sh(script: 'command -v apt-get >/dev/null 2>&1', returnStatus: true) == 0) {
+                            sh 'apt-get update -qq && apt-get install -y ansible'
+                        } else if (sh(script: 'command -v yum >/dev/null 2>&1', returnStatus: true) == 0) {
+                            sh 'yum install -y ansible'
+                        } else {
+                            error('No supported package manager found to install Ansible (pip3/apt-get/yum)')
+                        }
+                        env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook || echo ${HOME}/.local/bin/ansible-playbook', returnStdout: true).trim()
+                        env.ANSIBLE_BIN = sh(script: 'command -v ansible || echo ${HOME}/.local/bin/ansible', returnStdout: true).trim()
+                        sh "${env.ANSIBLE_PLAYBOOK_BIN} --version"
                     } else {
-                        sh 'ansible-playbook --version'
+                        env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook', returnStdout: true).trim()
+                        env.ANSIBLE_BIN = sh(script: 'command -v ansible', returnStdout: true).trim()
+                        sh "${env.ANSIBLE_PLAYBOOK_BIN} --version"
                     }
                 }
             }
@@ -132,18 +149,8 @@ pipeline{
                     withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                         sh '''
                             mkdir -p ~/.ssh
-                            # Normalize potential CRLF line endings in private key.
-                            awk '{ sub(/\r$/, ""); print }' "${SSH_KEY}" > ~/.ssh/id_rsa
+                            cp ${SSH_KEY} ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
-
-                            # Validate key format before attempting SSH.
-                            if ! head -n 1 ~/.ssh/id_rsa | grep -Eq '^-----BEGIN (OPENSSH|RSA|EC|DSA) PRIVATE KEY-----$'; then
-                                echo "Invalid Jenkins SSH credential format. Expected a PRIVATE KEY block." >&2
-                                head -n 2 ~/.ssh/id_rsa >&2
-                                exit 1
-                            fi
-
-                            ssh-keygen -y -f ~/.ssh/id_rsa >/dev/null
                             ssh-keyscan -H ${PUBLIC_IP} >> ~/.ssh/known_hosts
                         '''
                     }
@@ -158,7 +165,7 @@ pipeline{
                 withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                     sh '''
                         mkdir -p ~/.ssh
-                        awk '{ sub(/\r$/, ""); print }' "${SSH_KEY}" > ~/.ssh/id_rsa
+                        cp ${SSH_KEY} ~/.ssh/id_rsa
                         chmod 600 ~/.ssh/id_rsa
                         ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${SSH_USER}@${PUBLIC_IP} "echo 'SSH connection successful!'"
                         
@@ -186,7 +193,7 @@ server ansible_host=${env.PUBLIC_IP} ansible_user=${env.SERVER_NAME} ansible_ssh
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    sh 'ansible-playbook -i ansible_inventory.ini playbook.yml'
+                    sh "${env.ANSIBLE_PLAYBOOK_BIN} -i ansible_inventory.ini playbook.yml"
                 }
             }
         }
@@ -195,7 +202,7 @@ server ansible_host=${env.PUBLIC_IP} ansible_user=${env.SERVER_NAME} ansible_ssh
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    sh 'ansible -i ansible_inventory.ini webservers -m ping'
+                    sh "${env.ANSIBLE_BIN} -i ansible_inventory.ini webservers -m ping"
                 }
             }
 

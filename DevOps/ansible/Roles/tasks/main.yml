@@ -1,0 +1,11 @@
+---
+# tasks file for Roles
+
+- name: Install Python 3.10 and set as default
+  import_tasks: templatesTasks/install-Python.yml
+
+- name: Install containerd
+  import_tasks: templatesTasks/containerd.yml
+
+- name: Install Kubernetes components
+  import_tasks: templatesTasks/K8s.yml

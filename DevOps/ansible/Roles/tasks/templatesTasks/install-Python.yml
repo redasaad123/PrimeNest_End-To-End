@@ -1,0 +1,51 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for Roles
+- name: Gather facts
+  ansible.builtin.setup:
+
+- name: Clean up malformed Kubernetes repository file
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/kubernetes.list
+    state: absent
+  ignore_errors: yes
+
+- name: Enable universe repository
+  ansible.builtin.apt_repository:
+    repo: "deb http://archive.ubuntu.com/ubuntu {{ ansible_facts.lsb.codename }} universe"
+    state: present
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Python 3 and dependencies
+  ansible.builtin.apt:
+    name:
+      - python3
+      - python3-venv
+      - python3-pip
+      - python3-dev
+    state: present
+    install_recommends: yes
+
+- name: Ensure python3 is available
+  ansible.builtin.command: python3 --version
+
+- name: Verify Python version
+  ansible.builtin.command: python3 --version
+  register: python_version
+
+- name: Show installed Python version
+  ansible.builtin.debug:
+    msg: "Installed Python version is {{ python_version.stdout }}"
+
+
+- name: Update and upgrade apt packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+  tags: update
+
+
+

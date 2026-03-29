@@ -1,0 +1,8 @@
+---
+- name: Server Configuration
+  hosts: servers
+  become: true
+  roles:
+    - Roles
+      
+

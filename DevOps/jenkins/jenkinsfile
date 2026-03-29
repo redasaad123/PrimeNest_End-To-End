@@ -61,7 +61,7 @@ pipeline{
             steps {
                 dir('DevOps/terrafrom') {
                     sh 'rm -rf .terraform .terraform.lock.hcl'
-                    sh '${TF_BIN} init -reconfigure'
+                    sh "${TF_BIN} init -reconfigure"
                 }
                   
                 
@@ -72,7 +72,7 @@ pipeline{
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
                 dir('DevOps/terrafrom') {
-                    sh '${TF_BIN} plan -out=tfplan'
+                    sh "${TF_BIN} plan -out=tfplan"
                 }
             }
         }
@@ -81,7 +81,7 @@ pipeline{
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
                 dir('DevOps/terrafrom') {
-                    sh '${TF_BIN} apply -auto-approve tfplan'
+                    sh "${TF_BIN} apply -auto-approve tfplan"
                 }
             }
         }
@@ -91,10 +91,10 @@ pipeline{
             steps {
                 dir('DevOps/terrafrom') {
                     script {
-                        env.PUBLIC_IP = sh(script: '${TF_BIN} output -raw public_ip', returnStdout: true).trim()
+                        env.PUBLIC_IP = sh(script: "${TF_BIN} output -raw public_ip", returnStdout: true).trim()
                         echo "Public IP: ${env.PUBLIC_IP}"
 
-                        env.SERVER_NAME = sh(script: '${TF_BIN} output -raw vm_admin_username', returnStdout: true).trim()
+                        env.SERVER_NAME = sh(script: "${TF_BIN} output -raw vm_admin_username", returnStdout: true).trim()
                         echo "Server Name: ${env.SERVER_NAME}"
 
                         writeFile file: 'output/ServerName', text: "${env.SERVER_NAME}"

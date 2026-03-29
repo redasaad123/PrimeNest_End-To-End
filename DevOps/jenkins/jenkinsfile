@@ -117,13 +117,13 @@ pipeline{
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    script {
+                    sh '''
                         rm -f ansible_inventory.ini || true
                         echo "[webservers]" | tee ansible_inventory.ini
                         echo "server ansible_host=${PUBLIC_IP} ansible_user=${SERVER_NAME} ansible_ssh_private_key_file=/var/lib/jenkins/.ssh/id_rsa" | tee -a ansible_inventory.ini
 
                         writeFile file: 'ansible_inventory.ini' , text: readFile('ansible_inventory.ini')
-                    }
+                    '''
                 }
             }
         }

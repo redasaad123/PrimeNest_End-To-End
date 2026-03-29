@@ -69,15 +69,17 @@ pipeline{
                             '''
                             env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
                         } else {
-                            // Fallback: bootstrap a local Python + Ansible runtime via micromamba.
+                            // Fallback: bootstrap uv (no system Python required) then install ansible-core.
                             sh '''
                                 set -e
-                                mkdir -p "${WORKSPACE}/.mamba"
-                                curl -fsSL https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C "${WORKSPACE}/.mamba" bin/micromamba
-                                MAMBA_ROOT_PREFIX="${WORKSPACE}/.mamba/root" "${WORKSPACE}/.mamba/bin/micromamba" create -y -n ansible -c conda-forge python=3.11 ansible-core
+                                mkdir -p "${WORKSPACE}/.uv"
+                                curl -fsSL https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-gnu.tar.gz -o "${WORKSPACE}/.uv/uv.tar.gz"
+                                tar -xzf "${WORKSPACE}/.uv/uv.tar.gz" -C "${WORKSPACE}/.uv"
+                                UV_BIN="$(find "${WORKSPACE}/.uv" -type f -name uv | head -n 1)"
+                                chmod +x "${UV_BIN}"
+                                "${UV_BIN}" tool install --python 3.11 ansible-core
                             '''
-                            env.ANSIBLE_PLAYBOOK_BIN = "${WORKSPACE}/.mamba/root/envs/ansible/bin/ansible-playbook"
-                            env.ANSIBLE_BIN = "${WORKSPACE}/.mamba/root/envs/ansible/bin/ansible"
+                            env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
                         }
                         if (!env.ANSIBLE_PLAYBOOK_BIN?.trim()) {
                             env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook || echo ${HOME}/.local/bin/ansible-playbook', returnStdout: true).trim()

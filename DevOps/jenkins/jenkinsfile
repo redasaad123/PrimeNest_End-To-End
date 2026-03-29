@@ -99,7 +99,7 @@ pipeline{
             }
         }
 
-        stage(ssh connection) {
+        stage('ssh connection') {
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 

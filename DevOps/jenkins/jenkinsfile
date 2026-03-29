@@ -132,8 +132,10 @@ pipeline{
                     withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                         sh '''
                             mkdir -p ~/.ssh
-                            cp ${SSH_KEY} ~/.ssh/id_rsa
+                            # Normalize key line endings to avoid OpenSSH/libcrypto parse failures.
+                            tr -d '\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
+                            ssh-keygen -y -f ~/.ssh/id_rsa >/dev/null
                             ssh-keyscan -H ${PUBLIC_IP} >> ~/.ssh/known_hosts
                         '''
                     }
@@ -147,7 +149,10 @@ pipeline{
                 
                 withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no -i ${SSH_KEY} ${SSH_USER}@${PUBLIC_IP} "echo 'SSH connection successful!'"
+                        mkdir -p ~/.ssh
+                        tr -d '\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
+                        chmod 600 ~/.ssh/id_rsa
+                        ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${SSH_USER}@${PUBLIC_IP} "echo 'SSH connection successful!'"
                         
                     '''
                 }

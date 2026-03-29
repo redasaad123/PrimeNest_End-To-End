@@ -132,9 +132,17 @@ pipeline{
                     withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                         sh '''
                             mkdir -p ~/.ssh
-                            # Normalize key line endings to avoid OpenSSH/libcrypto parse failures.
-                            tr -d '\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
+                            # Normalize potential CRLF line endings in private key.
+                            awk '{ sub(/\r$/, ""); print }' "${SSH_KEY}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
+
+                            # Validate key format before attempting SSH.
+                            if ! head -n 1 ~/.ssh/id_rsa | grep -Eq '^-----BEGIN (OPENSSH|RSA|EC|DSA) PRIVATE KEY-----$'; then
+                                echo "Invalid Jenkins SSH credential format. Expected a PRIVATE KEY block." >&2
+                                head -n 2 ~/.ssh/id_rsa >&2
+                                exit 1
+                            fi
+
                             ssh-keygen -y -f ~/.ssh/id_rsa >/dev/null
                             ssh-keyscan -H ${PUBLIC_IP} >> ~/.ssh/known_hosts
                         '''
@@ -150,7 +158,7 @@ pipeline{
                 withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                     sh '''
                         mkdir -p ~/.ssh
-                        tr -d '\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
+                        awk '{ sub(/\r$/, ""); print }' "${SSH_KEY}" > ~/.ssh/id_rsa
                         chmod 600 ~/.ssh/id_rsa
                         ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${SSH_USER}@${PUBLIC_IP} "echo 'SSH connection successful!'"
                         
@@ -166,7 +174,7 @@ pipeline{
                 dir('DevOps/ansible') {
                     script {
                         writeFile file: 'ansible_inventory.ini', text: """[webservers]
-server ansible_host=${env.PUBLIC_IP} ansible_user=${env.SERVER_NAME} ansible_ssh_private_key_file=/var/lib/jenkins/.ssh/id_rsa
+server ansible_host=${env.PUBLIC_IP} ansible_user=${env.SERVER_NAME} ansible_ssh_private_key_file=/home/jenkins/.ssh/id_rsa
 """
                         sh 'cat ansible_inventory.ini'
                     }

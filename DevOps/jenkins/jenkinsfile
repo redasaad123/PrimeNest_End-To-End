@@ -47,10 +47,17 @@ pipeline{
                             chmod +x terraform
                             ./terraform version
                         '''
-                        env.TF_BIN = '${WORKSPACE}/.terraform-bin/terraform'
+                        // Prepend terraform binary directory to PATH
+                        env.PATH = "${WORKSPACE}/.terraform-bin:${env.PATH}"
                     } else {
-                        sh 'which terraform'
-                        env.TF_BIN = 'terraform'
+                        sh 'terraform version'
+                    }
+                    
+                    // Ensure ansible is available
+                    if (!sh(script: 'command -v ansible-playbook', returnStatus: true).toInteger().equals(0)) {
+                        echo "Ansible not found, please install it or provide it in PATH"
+                    } else {
+                        sh 'ansible-playbook --version'
                     }
                 }
             }
@@ -61,7 +68,7 @@ pipeline{
             steps {
                 dir('DevOps/terrafrom') {
                     sh 'rm -rf .terraform .terraform.lock.hcl'
-                    sh "${TF_BIN} init -reconfigure"
+                    sh 'terraform init -reconfigure'
                 }
                   
                 
@@ -72,7 +79,7 @@ pipeline{
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
                 dir('DevOps/terrafrom') {
-                    sh "${TF_BIN} plan -out=tfplan"
+                    sh 'terraform plan -out=tfplan'
                 }
             }
         }
@@ -81,7 +88,7 @@ pipeline{
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
                 dir('DevOps/terrafrom') {
-                    sh "${TF_BIN} apply -auto-approve tfplan"
+                    sh 'terraform apply -auto-approve tfplan'
                 }
             }
         }
@@ -91,10 +98,10 @@ pipeline{
             steps {
                 dir('DevOps/terrafrom') {
                     script {
-                        env.PUBLIC_IP = sh(script: "${TF_BIN} output -raw public_ip", returnStdout: true).trim()
+                        env.PUBLIC_IP = sh(script: 'terraform output -raw public_ip', returnStdout: true).trim()
                         echo "Public IP: ${env.PUBLIC_IP}"
 
-                        env.SERVER_NAME = sh(script: "${TF_BIN} output -raw vm_admin_username", returnStdout: true).trim()
+                        env.SERVER_NAME = sh(script: 'terraform output -raw vm_admin_username', returnStdout: true).trim()
                         echo "Server Name: ${env.SERVER_NAME}"
 
                         writeFile file: 'output/ServerName', text: "${env.SERVER_NAME}"

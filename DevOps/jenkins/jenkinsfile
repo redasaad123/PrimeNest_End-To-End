@@ -1,9 +1,5 @@
 pipeline{
-    agent {
-        docker {
-            image 'hashicorp/terraform:latest'
-        }
-    }
+    agent any
 
     parameters{
         booleanParam(name: 'SKIP_TERRAFORM', defaultValue: false, description: 'Provide IP to run Ansible only')

@@ -66,7 +66,7 @@ pipeline{
         stage('Terraform init') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     sh 'rm -rf .terraform .terraform.lock.hcl'
                     sh 'terraform init -reconfigure'
                 }
@@ -78,7 +78,7 @@ pipeline{
         stage('Terraform plan') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     sh 'terraform plan -out=tfplan'
                 }
             }
@@ -87,7 +87,7 @@ pipeline{
         stage('Terraform apply') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     sh 'terraform apply -auto-approve tfplan'
                 }
             }
@@ -96,7 +96,7 @@ pipeline{
         stage('Terraform output') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     script {
                         env.PUBLIC_IP = sh(script: 'terraform output -raw public_ip', returnStdout: true).trim()
                         echo "Public IP: ${env.PUBLIC_IP}"
@@ -115,7 +115,7 @@ pipeline{
         stage('Archive artifacts') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                archiveArtifacts artifacts: 'DevOps/terrafrom/output/*', fingerprint: true
+                archiveArtifacts artifacts: 'DevOps/terraform/output/*', fingerprint: true
             }
         }
 

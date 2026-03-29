@@ -69,10 +69,22 @@ pipeline{
                             '''
                             env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
                         } else {
-                            error('ansible-playbook is missing and python3 is unavailable for user-level install on this agent')
+                            // Fallback: bootstrap a local Python + Ansible runtime via micromamba.
+                            sh '''
+                                set -e
+                                mkdir -p "${WORKSPACE}/.mamba"
+                                curl -fsSL https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C "${WORKSPACE}/.mamba" bin/micromamba
+                                MAMBA_ROOT_PREFIX="${WORKSPACE}/.mamba/root" "${WORKSPACE}/.mamba/bin/micromamba" create -y -n ansible -c conda-forge python=3.11 ansible-core
+                            '''
+                            env.ANSIBLE_PLAYBOOK_BIN = "${WORKSPACE}/.mamba/root/envs/ansible/bin/ansible-playbook"
+                            env.ANSIBLE_BIN = "${WORKSPACE}/.mamba/root/envs/ansible/bin/ansible"
                         }
-                        env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook || echo ${HOME}/.local/bin/ansible-playbook', returnStdout: true).trim()
-                        env.ANSIBLE_BIN = sh(script: 'command -v ansible || echo ${HOME}/.local/bin/ansible', returnStdout: true).trim()
+                        if (!env.ANSIBLE_PLAYBOOK_BIN?.trim()) {
+                            env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook || echo ${HOME}/.local/bin/ansible-playbook', returnStdout: true).trim()
+                        }
+                        if (!env.ANSIBLE_BIN?.trim()) {
+                            env.ANSIBLE_BIN = sh(script: 'command -v ansible || echo ${HOME}/.local/bin/ansible', returnStdout: true).trim()
+                        }
                         sh "${env.ANSIBLE_PLAYBOOK_BIN} --version"
                     } else {
                         env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook', returnStdout: true).trim()

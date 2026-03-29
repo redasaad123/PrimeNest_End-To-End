@@ -19,63 +19,14 @@ pipeline{
         
         TF_VAR_secret_key       = credentials('secret_key')
         TF_VAR_access_key      = credentials('access_key')
-        TERRAFORM_BIN = 'terraform'
-        ANSIBLE_BIN = 'ansible'
-        ANSIBLE_PLAYBOOK_BIN = 'ansible-playbook'
+        
 
     }
     stages{
-        stage('Setup Tools') {
-            steps {
-                script {
-                    // Ensure terraform is available
-                    if (!sh(script: 'command -v terraform', returnStatus: true).toInteger().equals(0)) {
-                        echo "Terraform not found, installing..."
-                        sh '''
-                            set -e
-                            mkdir -p "$WORKSPACE/.bin"
-                            curl -fsSL "https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip" -o "$WORKSPACE/.bin/terraform.zip"
-                            
-                            # Try unzip first, fall back to Python if not available
-                            if command -v unzip >/dev/null 2>&1; then
-                                cd "$WORKSPACE/.bin"
-                                unzip -o terraform.zip
-                            elif command -v python3 >/dev/null 2>&1; then
-                                python3 <<'PYTHON'
-import zipfile
-import os
-workspace = os.environ['WORKSPACE']
-zip_path = f"{workspace}/.bin/terraform.zip"
-extract_path = f"{workspace}/.bin"
-with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-    zip_ref.extractall(extract_path)
-PYTHON
-                            else
-                                echo "Error: Neither unzip nor python3 available for extraction" >&2
-                                exit 1
-                            fi
-                            
-                            chmod +x "$WORKSPACE/.bin/terraform"
-                            "$WORKSPACE/.bin/terraform" version
-                            export PATH="$WORKSPACE/.bin:$PATH"
-                        '''
-                    } else {
-                        sh 'terraform version'
-                    }
-                    
-                    // Ensure ansible is available
-                    if (!sh(script: 'command -v ansible-playbook', returnStatus: true).toInteger().equals(0)) {
-                        echo "Ansible not found, please install it or provide it in PATH"
-                    } else {
-                        sh 'ansible-playbook --version'
-                    }
-                }
-            }
-        }
         stage('Terraform init') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     sh 'rm -rf .terraform .terraform.lock.hcl'
                     sh 'terraform init -reconfigure'
                 }
@@ -87,7 +38,7 @@ PYTHON
         stage('Terraform plan') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     sh 'terraform plan -out=tfplan'
                 }
             }
@@ -96,7 +47,7 @@ PYTHON
         stage('Terraform apply') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     sh 'terraform apply -auto-approve tfplan'
                 }
             }
@@ -105,7 +56,7 @@ PYTHON
         stage('Terraform output') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                dir('DevOps/terrafrom') {
+                dir('DevOps/terraform') {
                     script {
                         env.PUBLIC_IP = sh(script: 'terraform output -raw public_ip', returnStdout: true).trim()
                         echo "Public IP: ${env.PUBLIC_IP}"
@@ -124,7 +75,7 @@ PYTHON
         stage('Archive artifacts') {
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
-                archiveArtifacts artifacts: 'DevOps/terrafrom/output/*', fingerprint: true
+                archiveArtifacts artifacts: 'DevOps/terraform/output/*', fingerprint: true
             }
         }
 
@@ -136,7 +87,7 @@ PYTHON
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
+                    withcredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                         sh '''
                             mkdir -p ~/.ssh
                             cp ${SSH_KEY} ~/.ssh/id_rsa
@@ -152,7 +103,7 @@ PYTHON
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 
-                withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
+                withcredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no -i ${SSH_KEY} ${SSH_USER}@${PUBLIC_IP} "echo 'SSH connection successful!'"
                         
@@ -166,12 +117,13 @@ PYTHON
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    script {
-                        writeFile file: 'ansible_inventory.ini', text: """[webservers]
-server ansible_host=${env.PUBLIC_IP} ansible_user=${env.SERVER_NAME} ansible_ssh_private_key_file=/var/lib/jenkins/.ssh/id_rsa
-"""
-                        sh 'cat ansible_inventory.ini'
-                    }
+                    sh '''
+                        rm -f ansible_inventory.ini || true
+                        echo "[webservers]" | tee ansible_inventory.ini
+                        echo "server ansible_host=${PUBLIC_IP} ansible_user=${SERVER_NAME} ansible_ssh_private_key_file=/var/lib/jenkins/.ssh/id_rsa" | tee -a ansible_inventory.ini
+
+                        writeFile file: 'ansible_inventory.ini' , text: readFile('ansible_inventory.ini')
+                    '''
                 }
             }
         }

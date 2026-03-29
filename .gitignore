@@ -2,6 +2,9 @@
 *.tfstate
 *.tfstate.backup
 # Visual Studio files
+*.terraform
+*.terraform.lock.hcl
+
 
 .vs/
 [Bb]in/

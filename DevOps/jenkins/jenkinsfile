@@ -32,7 +32,7 @@ pipeline{
             steps {
                 dir('DevOps/terraform') {
                     sh 'rm -rf .terraform .terraform.lock.hcl'
-                    sh 'terraform init -reconfigure'
+                    sh '/usr/local/bin/terraform init'
                 }
                   
                 
@@ -43,7 +43,7 @@ pipeline{
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
                 dir('DevOps/terraform') {
-                    sh 'terraform plan -out=tfplan'
+                    sh '/usr/local/bin/terraform plan -out=tfplan'
                 }
             }
         }
@@ -52,7 +52,7 @@ pipeline{
             when { expression { return !params.SKIP_TERRAFORM }} 
             steps {
                 dir('DevOps/terraform') {
-                    sh 'terraform apply -auto-approve tfplan'
+                    sh '/usr/local/bin/terraform apply -auto-approve tfplan'
                 }
             }
         }
@@ -62,10 +62,10 @@ pipeline{
             steps {
                 dir('DevOps/terraform') {
                     script {
-                        env.PUBLIC_IP = sh(script: 'terraform output -raw public_ip', returnStdout: true).trim()
+                        env.PUBLIC_IP = sh(script: '/usr/local/bin/terraform output -raw public_ip', returnStdout: true).trim()
                         echo "Public IP: ${env.PUBLIC_IP}"
 
-                        env.SERVER_NAME = sh(script: 'terraform output -raw vm_admin_username', returnStdout: true).trim()
+                        env.SERVER_NAME = sh(script: '/usr/local/bin/terraform output -raw vm_admin_username', returnStdout: true).trim()
                         echo "Server Name: ${env.SERVER_NAME}"
 
                         writeFile file: 'output/ServerName', text: "${env.SERVER_NAME}"
@@ -136,7 +136,7 @@ pipeline{
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    sh 'ansible-playbook -i ansible_inventory.ini playbook.yml'
+                    sh '/usr/bin/ansible-playbook -i ansible_inventory.ini playbook.yml'
                 }
             }
         }
@@ -145,7 +145,7 @@ pipeline{
             when { expression { return !params.SKIP_ANSIBLE }} 
             steps {
                 dir('DevOps/ansible') {
-                    sh 'ansible -i ansible_inventory.ini webservers -m ping'
+                    sh '/usr/bin/ansible -i ansible_inventory.ini webservers -m ping'
                 }
             }
 

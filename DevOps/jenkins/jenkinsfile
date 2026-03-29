@@ -35,9 +35,27 @@ pipeline{
                             set -e
                             mkdir -p "$WORKSPACE/.bin"
                             curl -fsSL "https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip" -o "$WORKSPACE/.bin/terraform.zip"
-                            cd "$WORKSPACE/.bin"
-                            unzip -o terraform.zip
-                            chmod +x terraform
+                            
+                            # Try unzip first, fall back to Python if not available
+                            if command -v unzip >/dev/null 2>&1; then
+                                cd "$WORKSPACE/.bin"
+                                unzip -o terraform.zip
+                            elif command -v python3 >/dev/null 2>&1; then
+                                python3 <<'PYTHON'
+import zipfile
+import os
+workspace = os.environ['WORKSPACE']
+zip_path = f"{workspace}/.bin/terraform.zip"
+extract_path = f"{workspace}/.bin"
+with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    zip_ref.extractall(extract_path)
+PYTHON
+                            else
+                                echo "Error: Neither unzip nor python3 available for extraction" >&2
+                                exit 1
+                            fi
+                            
+                            chmod +x "$WORKSPACE/.bin/terraform"
                             "$WORKSPACE/.bin/terraform" version
                             export PATH="$WORKSPACE/.bin:$PATH"
                         '''

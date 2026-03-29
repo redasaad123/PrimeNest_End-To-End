@@ -60,15 +60,16 @@ pipeline{
                     // Ensure ansible is available
                     if (!sh(script: 'command -v ansible-playbook', returnStatus: true).toInteger().equals(0)) {
                         echo "Ansible not found, installing..."
-                        if (sh(script: 'command -v pip3 >/dev/null 2>&1', returnStatus: true) == 0) {
-                            sh 'pip3 install --user ansible-core'
+                        if (sh(script: 'command -v python3 >/dev/null 2>&1', returnStatus: true) == 0) {
+                            // Install without root privileges.
+                            sh '''
+                                python3 -m ensurepip --upgrade --user >/dev/null 2>&1 || true
+                                python3 -m pip install --user --upgrade pip
+                                python3 -m pip install --user ansible-core
+                            '''
                             env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
-                        } else if (sh(script: 'command -v apt-get >/dev/null 2>&1', returnStatus: true) == 0) {
-                            sh 'apt-get update -qq && apt-get install -y ansible'
-                        } else if (sh(script: 'command -v yum >/dev/null 2>&1', returnStatus: true) == 0) {
-                            sh 'yum install -y ansible'
                         } else {
-                            error('No supported package manager found to install Ansible (pip3/apt-get/yum)')
+                            error('ansible-playbook is missing and python3 is unavailable for user-level install on this agent')
                         }
                         env.ANSIBLE_PLAYBOOK_BIN = sh(script: 'command -v ansible-playbook || echo ${HOME}/.local/bin/ansible-playbook', returnStdout: true).trim()
                         env.ANSIBLE_BIN = sh(script: 'command -v ansible || echo ${HOME}/.local/bin/ansible', returnStdout: true).trim()

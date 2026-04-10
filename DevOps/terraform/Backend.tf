@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "recomind-devops-terraform-state-461703429082"
+    bucket = "primenest-terraform-state"
     key    = "node/terraform.tfstate"
     region = "eu-central-1"
     encrypt = true

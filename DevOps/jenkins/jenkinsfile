@@ -164,9 +164,12 @@ pipeline{
                     withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                         sh '''
                             mkdir -p ~/.ssh
-                            tr -d '\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
+                            tr -d '\\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
-                            ssh-keygen -yf ~/.ssh/id_rsa >/dev/null
+                            if ! ssh-keygen -yf ~/.ssh/id_rsa >/dev/null 2>&1; then
+                                echo "Invalid SSH private key in Jenkins credential SSH_USER (format/passphrase/line-endings issue)."
+                                exit 1
+                            fi
                             ssh-keyscan -H ${PUBLIC_IP} >> ~/.ssh/known_hosts
                         '''
                     }
@@ -181,9 +184,12 @@ pipeline{
                 withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'SSH_KEY' , usernameVariable: 'SSH_USER')]) {
                     sh '''
                         mkdir -p ~/.ssh
-                        tr -d '\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
+                        tr -d '\\r' < "${SSH_KEY}" > ~/.ssh/id_rsa
                         chmod 600 ~/.ssh/id_rsa
-                        ssh-keygen -yf ~/.ssh/id_rsa >/dev/null
+                        if ! ssh-keygen -yf ~/.ssh/id_rsa >/dev/null 2>&1; then
+                            echo "Invalid SSH private key in Jenkins credential SSH_USER (format/passphrase/line-endings issue)."
+                            exit 1
+                        fi
                         ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${SSH_USER}@${PUBLIC_IP} "echo 'SSH connection successful!'"
                         
                     '''

@@ -203,7 +203,7 @@ pipeline{
             steps {
                 dir('DevOps/ansible') {
                     script {
-                        writeFile file: 'ansible_inventory.ini', text: """[webservers]
+                        writeFile file: 'ansible_inventory.ini', text: """[servers]
 server ansible_host=${env.PUBLIC_IP} ansible_user=${env.SERVER_NAME} ansible_ssh_private_key_file=/home/jenkins/.ssh/id_rsa
 """
                         sh 'cat ansible_inventory.ini'

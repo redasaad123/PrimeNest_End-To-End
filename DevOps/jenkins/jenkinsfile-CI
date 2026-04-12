@@ -115,7 +115,7 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 sh '''
-                docker build -t ${ImageName}:${tag} .
+                nerdctl build -t ${ImageName}:${tag} .
                 ''' 
             }
         }
@@ -147,8 +147,8 @@ pipeline {
             steps {
                 echo 'Pushing Docker image to Docker Hub...'
                 sh '''
-                echo "${DockerHubCredentials_Password}" | docker login -u "${DockerHubCredentials_Username}" --password-stdin
-                docker push ${ImageName}:${tag}
+                echo "${DockerHubCredentials_Password}" | nerdctl login -u "${DockerHubCredentials_Username}" --password-stdin
+                nerdctl push ${ImageName}:${tag}
                 '''
             }
         }

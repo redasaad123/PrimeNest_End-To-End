@@ -65,7 +65,7 @@ Pipeline {
             steps {
                 echo 'Running OWASP Dependency Check...'
                 sh 'mkdir -p dependency-check-report'
-                dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest' odcInstallation: 'OWASP-Dependency'
+                dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest', odcInstallation: 'OWASP-Dependency'
             }
         }
 

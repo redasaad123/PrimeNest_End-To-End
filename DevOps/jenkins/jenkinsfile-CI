@@ -5,8 +5,8 @@ pipeline {
             apiVersion: v1
             kind: Pod
             spec:
-            containers:
-            - name: dotnet-sdk
+              containers:
+              - name: dotnet-sdk
                 image: mcr.microsoft.com/dotnet/sdk:6.0
                 command:
                 - cat

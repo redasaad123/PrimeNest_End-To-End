@@ -1,6 +1,5 @@
 pipeline {
     agent {
-       
         kubernetes {
             yaml """
             apiVersion: v1
@@ -9,12 +8,13 @@ pipeline {
             containers:
             - name: dotnet-sdk
                 image: mcr.microsoft.com/dotnet/sdk:6.0
-                command: ["cat"]
+                command:
+                - cat
                 tty: true
             """
-        
         }
     }
+    
     environment {
         // Define any environment variables here
 

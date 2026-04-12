@@ -1,8 +1,18 @@
 pipeline {
     agent {
-        docker {
-            image 'mcr.microsoft.com/dotnet/sdk:6.0' // Use the official .NET SDK image
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket for building and pushing images
+        agent {
+            kubernetes {
+                yaml """
+                apiVersion: v1
+                kind: Pod
+                spec:
+                containers:
+                - name: dotnet-sdk
+                    image: mcr.microsoft.com/dotnet/sdk:6.0
+                    command: ["cat"]
+                    tty: true
+                """
+            }
         }
     }
     environment {

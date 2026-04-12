@@ -1,6 +1,7 @@
 pipeline {
     agent {
         kubernetes {
+            defaultContainer 'dotnet-sdk'
             yaml """
             apiVersion: v1
             kind: Pod

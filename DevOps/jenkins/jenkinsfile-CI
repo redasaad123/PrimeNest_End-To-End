@@ -1,0 +1,160 @@
+Pipeline {
+    agent {
+        docker {
+            image 'mcr.microsoft.com/dotnet/sdk:6.0' // Use the official .NET SDK image
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket for building and pushing images
+        }
+    }
+    environment {
+        // Define any environment variables here
+
+        DockerHubCredentials = credentials('dockerhub') 
+        ImageName = 'redasaad123/primnest'
+        tag = "latest" // You can use a dynamic tag based on the build number or git commit hash
+        SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
+        SONAR_ORGANIZATION = 'redasaad123' // Replace with your SonarCloud organization key
+    }
+
+    
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                
+                git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
+                
+                
+            }
+        }
+
+
+        stage('set up .Net') {
+            steps {
+                echo 'Setting up .net...'
+                sh 'dotnet --version' // Check if .NET is installed
+                // Add any additional setup commands if needed
+            }
+        }
+
+        stage('Restore') {
+            steps {
+                echo 'Restoring dependencies...'
+                sh 'dotnet restore ./PrimeNest/PrimeNest.sln' // Restore .NET dependencies
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'dotnet build ./PrimeNest/PrimeNest.sln' // Build the .NET solution
+            }
+            
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'mkdir -p test-results'
+                sh 'dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj --no-build --logger "trx;LogFileName=test-results.trx" --results-directory ./test-results'
+                archiveArtifacts artifacts: 'test-results/*.trx', fingerprint: true
+            }
+        }
+
+        stage('OWASP Dependency Check') {
+            steps {
+                echo 'Running OWASP Dependency Check...'
+                sh 'mkdir -p dependency-check-report'
+                dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest' odcInstallation: 'OWASP-Dependency'
+            }
+        }
+
+        stage('Archive OWASP Report') {
+            steps {
+                archiveArtifacts artifacts: 'dependency-check-report/*.html', fingerprint: true
+            }
+        }
+
+        stage('SonarCloud Analysis') {
+            steps {
+                echo 'Running SonarCloud Analysis...'
+                withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+                    sh '''
+                    export PATH="$PATH:$HOME/.dotnet/tools"
+
+                    dotnet tool install --global dotnet-sonarscanner || true
+
+                    dotnet sonarscanner begin \
+                    /k:"${SONAR_PROJECT_KEY}" \
+                    /o:"${SONAR_ORGANIZATION}" \
+                    /d:sonar.host.url="https://sonarcloud.io" \
+                    /d:sonar.token="${SONAR_TOKEN}"
+
+                    dotnet build ./PrimeNest/PrimeNest.sln --no-restore
+
+                    dotnet sonarscanner end /d:sonar.token="${SONAR_TOKEN}"
+                    '''
+                }
+            }
+        }
+
+
+
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image...'
+                sh '''
+                docker build -t ${ImageName}:${tag} .
+                ''' 
+            }
+        }
+
+        stage('prepare trivy') {
+            steps {
+                echo 'Preparing for trivy scan...'
+                sh '''
+
+                mkdir -p trivy-templates
+                wget -q https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -O trivy-templates/html.tpl
+                '''
+            }
+        }
+
+        stage('Trivy Scan') {
+            steps {
+                echo 'Running Trivy scan...'
+                sh '''
+                mkdir -p trivy-reports
+                trivy image --format template --template "@trivy-templates/html.tpl" -o trivy-reports/trivy-report.html ${ImageName}:${tag}
+                '''
+
+                archiveArtifacts artifacts: "trivy-*.html", allowEmptyArchive: true
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                echo 'Pushing Docker image to Docker Hub...'
+                sh '''
+                echo "${DockerHubCredentials_Password}" | docker login -u "${DockerHubCredentials_Username}" --password-stdin
+                docker push ${ImageName}:${tag}
+                '''
+            }
+        }
+
+
+        stage('Trigger CD Pipeline')
+        {
+            steps {
+                echo 'Triggering CD pipeline...'
+                build job: 'jenkinsfile-CD', wait: false
+            }
+        }
+
+        
+
+
+
+    }
+}
+

@@ -389,7 +389,7 @@ spec:
                     --scan ./PrimeNest \
                     --format HTML \
                     --out dependency-check-report
-                    '''
+                    ''' , odcInstallation: 'OWASP-Dependency'
                 }
 
                 archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true

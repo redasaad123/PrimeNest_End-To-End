@@ -2,16 +2,16 @@ pipeline {
     agent {
         kubernetes {
             defaultContainer 'dotnet-sdk'
-            yaml """
-            apiVersion: v1
-            kind: Pod
-            spec:
-            containers:
-            - name: dotnet-sdk
-                image: mcr.microsoft.com/dotnet/sdk:8.0
-                command: ["cat"]
-                tty: true
-                resources:
+                        yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+    containers:
+        - name: dotnet-sdk
+            image: mcr.microsoft.com/dotnet/sdk:8.0
+            command: ["cat"]
+            tty: true
+            resources:
                 requests:
                     cpu: "200m"
                     memory: "512Mi"
@@ -19,31 +19,31 @@ pipeline {
                     cpu: "500m"
                     memory: "1Gi"
 
-            - name: kaniko
-                image: gcr.io/kaniko-project/executor:debug
-                command: ["/busybox/sh"]
-                args: ["-c", "while true; do sleep 100; done"]
-                tty: true
-                resources:
+        - name: kaniko
+            image: gcr.io/kaniko-project/executor:debug
+            command: ["/busybox/sh"]
+            args: ["-c", "while true; do sleep 100; done"]
+            tty: true
+            resources:
                 requests:
                     cpu: "500m"
                     memory: "1Gi"
                 limits:
-                    cpu: "1000m" 
-                    memory: "2Gi" # أهم ليميت لحماية السيرفر الـ 4GB
+                    cpu: "1000m"
+                    memory: "2Gi"
 
-            - name: trivy
-                image: ghcr.io/aquasecurity/trivy:0.49.1
-                command: ["sleep"]
-                args: ["99d"]
-                resources:
+        - name: trivy
+            image: ghcr.io/aquasecurity/trivy:0.49.1
+            command: ["sleep"]
+            args: ["99d"]
+            resources:
                 requests:
                     cpu: "200m"
                     memory: "256Mi"
                 limits:
                     cpu: "500m"
                     memory: "512Mi"
-            """
+'''.stripIndent()
         }
     }
     

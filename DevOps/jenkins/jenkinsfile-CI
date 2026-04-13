@@ -130,15 +130,26 @@ pipeline {
         //     }
         // }
 
-        stage('kaniko Build and Push') {
-            steps {
-                echo 'Building and pushing Docker image with Kaniko...'
-                sh '''
-                echo "${DockerHubCredentials_Password}" | /kaniko/executor --context . --dockerfile ../Dockerfile --destination ${ImageName}:${tag} --cache=true --cache-repo=${ImageName}-cache
-                '''
-            }
-        }
+        // stage('kaniko Build and Push') {
+        //     steps {
+        //         echo 'Building and pushing Docker image with Kaniko...'
+        //         sh '''
+        //         echo "${DockerHubCredentials_Password}" | /kaniko/executor --context . --dockerfile ../Dockerfile --destination ${ImageName}:${tag} --cache=true --cache-repo=${ImageName}-cache
+        //         '''
+        //     }
+        // }
 
+            stage('Build and Push with Kaniko') {
+                steps {
+                    container('kaniko') {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            sh '''
+                            echo "${DOCKER_PASSWORD}" | /kaniko/executor --context . --dockerfile ../Dockerfile --destination ${ImageName}:${tag} --cache=true --cache-repo=${ImageName}-cache
+                            '''
+                        }
+                    }
+                }
+            }
 
 
 

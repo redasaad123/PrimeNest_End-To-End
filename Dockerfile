@@ -7,7 +7,7 @@ WORKDIR /src
 COPY ["PrimeNest/", "."]
 
 # Restore dependencies
-RUN dotnet restore "PrimeNest.sln"
+RUN dotnet restore "ProjectApi/ProjectApi.csproj"
 
 # Publish the application
 RUN dotnet publish "ProjectApi/ProjectApi.csproj" -c Release -o /app/publish --no-restore

@@ -12,12 +12,12 @@ pipeline {
                 command:
                 - cat
                 tty: true
-            - name: kaniko
+              - name: kaniko
                 image: gcr.io/kaniko-project/executor:latest
                 command:[sleep]
                 args:["99d"]
 
-            - name: trivy
+              - name: trivy
                 image: aquasec/trivy:latest
                 command:[sleep]
                 args:["99d"]

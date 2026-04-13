@@ -1,17 +1,23 @@
 pipeline {
     agent {
         kubernetes {
-            defaultContainer 'dotnet-sdk'
             yaml """
             apiVersion: v1
             kind: Pod
             spec:
-              containers:
-              - name: dotnet-sdk
-                image: mcr.microsoft.com/dotnet/sdk:8.0
-                command:
-                - cat
+            containers:
+            - name: dotnet-sdk
+                image: mcr.microsoft.com/dotnet/sdk:6.0
+                command: ["cat"]
                 tty: true
+            - name: kaniko
+                image: gcr.io/kaniko-project/executor:debug
+                command: ["sleep"]
+                args: ["99d"]
+            - name: trivy
+                image: aquasec/trivy:latest
+                command: ["sleep"]
+                args: ["99d"]
             """
         }
     }

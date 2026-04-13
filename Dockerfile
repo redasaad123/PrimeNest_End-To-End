@@ -4,20 +4,20 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy sln and project files
-COPY ["PrimeNest/PrimeNest.sln", "."]
-COPY ["PrimeNest/Core/Core.csproj", "Core/"]
-COPY ["PrimeNest/Infrastructure/Infrastructure.csproj", "Infrastructure/"]
-COPY ["PrimeNest/ProjectApi/ProjectApi.csproj", "ProjectApi/"]
-COPY ["PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj", "ProjectApi.Test/"]
+COPY ["PrimeNest/PrimeNest.sln", "PrimeNest/"]
+COPY ["PrimeNest/Core/Core.csproj", "PrimeNest/Core/"]
+COPY ["PrimeNest/Infrastructure/Infrastructure.csproj", "PrimeNest/Infrastructure/"]
+COPY ["PrimeNest/ProjectApi/ProjectApi.csproj", "PrimeNest/ProjectApi/"]
+COPY ["PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj", "PrimeNest/ProjectApi.Test/"]
 
 # Restore dependencies
-RUN dotnet restore "PrimeNest.sln"
+RUN dotnet restore "PrimeNest/PrimeNest.sln"
 
 # Copy all source files
-COPY ["PrimeNest/", "."]
+COPY ["PrimeNest/", "PrimeNest/"]
 
 # Publish the application
-RUN dotnet publish "ProjectApi/ProjectApi.csproj" -c Release -o /app/publish --no-restore
+RUN dotnet publish "PrimeNest/ProjectApi/ProjectApi.csproj" -c Release -o /app/publish --no-restore
 
 # Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime

@@ -19,7 +19,7 @@ pipeline {
                 tty: true
 
               - name: trivy
-                image: aquasecurity/trivy:0.49.1
+                image: ghcr.io/aquasecurity/trivy:0.49.1
                 command: [sleep]
                 args: ["99d"]
             """

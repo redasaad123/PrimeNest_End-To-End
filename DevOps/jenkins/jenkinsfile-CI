@@ -306,16 +306,18 @@ spec:
 
             steps {
                 container('dotnet') {
-                    sh '''
+                     sh '''
                     mkdir -p test-results
 
                     dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj \
                     --no-build \
-                    --logger "trx;LogFileName=test-results.trx" \
+                    --logger "trx" \
                     --results-directory ./test-results
+
+                    find test-results || true
                     '''
 
-                    archiveArtifacts artifacts: 'test-results/*.trx', fingerprint: true
+                    archiveArtifacts artifacts: 'test-results/**/*.trx', allowEmptyArchive: true
                 }
             }
         }

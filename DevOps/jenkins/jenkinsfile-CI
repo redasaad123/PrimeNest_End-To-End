@@ -13,12 +13,13 @@ pipeline {
                 - cat
                 tty: true
               - name: kaniko
-                image: gcr.io/kaniko-project/executor:latest
-                command: [sleep]
-                args: ["99d"]
+                image: gcr.io/kaniko-project/executor:debug
+                command: ["/busybox/sh"]
+                args: ["-c", "while true; do sleep 100; done"]
+                tty: true
 
               - name: trivy
-                image: aquasec/trivy:latest
+                image: aquasecurity/trivy:0.49.1
                 command: [sleep]
                 args: ["99d"]
             """

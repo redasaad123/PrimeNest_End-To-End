@@ -111,14 +111,36 @@ pipeline {
 
 
 
-        stage('Build Docker Image') {
+        // stage('Build Docker Image') {
+        //     steps {
+        //         echo 'Building Docker image...'
+        //         sh '''
+        //         nerdctl build -t ${ImageName}:${tag} .
+        //         ''' 
+        //     }
+        // }
+
+        // stage('Push Docker Image') {
+        //     steps {
+        //         echo 'Pushing Docker image to Docker Hub...'
+        //         sh '''
+        //         echo "${DockerHubCredentials_Password}" | nerdctl login -u "${DockerHubCredentials_Username}" --password-stdin
+        //         nerdctl push ${ImageName}:${tag}
+        //         '''
+        //     }
+        // }
+
+        stage('kaniko Build and Push') {
             steps {
-                echo 'Building Docker image...'
+                echo 'Building and pushing Docker image with Kaniko...'
                 sh '''
-                nerdctl build -t ${ImageName}:${tag} .
-                ''' 
+                echo "${DockerHubCredentials_Password}" | /kaniko/executor --context . --dockerfile ../Dockerfile --destination ${ImageName}:${tag} --cache=true --cache-repo=${ImageName}-cache
+                '''
             }
         }
+
+
+
 
         stage('prepare trivy') {
             steps {
@@ -143,15 +165,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                echo 'Pushing Docker image to Docker Hub...'
-                sh '''
-                echo "${DockerHubCredentials_Password}" | nerdctl login -u "${DockerHubCredentials_Username}" --password-stdin
-                nerdctl push ${ImageName}:${tag}
-                '''
-            }
-        }
+        
 
 
         // stage('Trigger CD Pipeline')

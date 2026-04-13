@@ -242,14 +242,11 @@
 //     }
 // }
 
-
-
-
-
 pipeline {
     agent none
 
     environment {
+        DockerHubCredentials = credentials('dockerhub')
         ImageName = 'redasaad123/primnest'
         tag = "latest"
         SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
@@ -257,6 +254,54 @@ pipeline {
     }
 
     stages {
+
+        // ===================== CHECKOUT =====================
+        stage('Checkout') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: dotnet
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
+
+            steps {
+                container('dotnet') {
+                    git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
+                }
+            }
+        }
+
+        // ===================== RESTORE =====================
+        stage('Restore') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: dotnet
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
+
+            steps {
+                container('dotnet') {
+                    sh 'dotnet restore ./PrimeNest/PrimeNest.sln'
+                }
+            }
+        }
 
         // ===================== BUILD =====================
         stage('Build') {
@@ -277,12 +322,7 @@ spec:
 
             steps {
                 container('dotnet') {
-                    git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
-
-                    sh '''
-                    dotnet restore ./PrimeNest/PrimeNest.sln
-                    dotnet build ./PrimeNest/PrimeNest.sln
-                    '''
+                    sh 'dotnet build ./PrimeNest/PrimeNest.sln'
                 }
             }
         }
@@ -306,7 +346,7 @@ spec:
 
             steps {
                 container('dotnet') {
-                     sh '''
+                    sh '''
                     mkdir -p test-results
 
                     dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj \
@@ -322,8 +362,8 @@ spec:
             }
         }
 
-        // ===================== SONAR =====================
-        stage('SonarCloud') {
+        // ===================== OWASP =====================
+        stage('OWASP Dependency Check') {
             agent {
                 kubernetes {
                     yaml '''
@@ -341,10 +381,50 @@ spec:
 
             steps {
                 container('java') {
+                    sh '''
+                    mkdir -p dependency-check-report
+
+                    dependency-check.sh \
+                    --project PrimeNest \
+                    --scan ./PrimeNest \
+                    --format HTML \
+                    --out dependency-check-report
+                    '''
+                }
+
+                archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true
+            }
+        }
+
+        // ===================== SONAR =====================
+        stage('SonarCloud Analysis') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: dotnet
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    command: ["cat"]
+    tty: true
+
+  - name: java
+    image: eclipse-temurin:17-jdk
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
+
+            steps {
+                container('dotnet') {
                     withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
                         sh '''
-                        dotnet tool install --global dotnet-sonarscanner || true
                         export PATH="$PATH:$HOME/.dotnet/tools"
+
+                        dotnet tool install --global dotnet-sonarscanner || true
 
                         git clone https://github.com/redasaad123/PrimeNest_End-To-End.git .
                         dotnet restore ./PrimeNest/PrimeNest.sln
@@ -364,40 +444,7 @@ spec:
             }
         }
 
-        // ===================== TRIVY =====================
-        stage('Trivy Scan') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: trivy
-    image: aquasec/trivy:latest
-    command: ["cat"]
-    tty: true
-'''
-                }
-            }
-
-            steps {
-                container('trivy') {
-                    sh '''
-                    mkdir -p trivy-reports
-
-                    trivy fs \
-                    --format html \
-                    -o trivy-reports/report.html \
-                    ./PrimeNest
-                    '''
-
-                    archiveArtifacts artifacts: 'trivy-reports/*', allowEmptyArchive: true
-                }
-            }
-        }
-
-        // ===================== DOCKER BUILD =====================
+        // ===================== KANIKO =====================
         stage('Build & Push Docker (Kaniko)') {
             agent {
                 kubernetes {
@@ -433,5 +480,41 @@ spec:
                 }
             }
         }
+
+        // ===================== TRIVY =====================
+        stage('Trivy Scan') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: trivy
+    image: aquasec/trivy:latest
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
+
+            steps {
+                container('trivy') {
+                    sh '''
+                    mkdir -p trivy-reports
+
+                    trivy fs \
+                    --format html \
+                    -o trivy-reports/report.html \
+                    ./PrimeNest
+                    '''
+                }
+
+                archiveArtifacts artifacts: 'trivy-reports/*', allowEmptyArchive: true
+            }
+        }
     }
 }
+
+
+

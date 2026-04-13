@@ -420,7 +420,6 @@ spec:
 
                         dotnet tool install --global dotnet-sonarscanner || true
 
-                        git clone https://github.com/redasaad123/PrimeNest_End-To-End.git .
                         dotnet restore ./PrimeNest/PrimeNest.sln
 
                         dotnet sonarscanner begin \

@@ -1,244 +1,435 @@
+// pipeline {
+//     agent {
+//         kubernetes {
+//             defaultContainer 'dotnet-sdk'
+//             yaml '''
+// apiVersion: v1
+// kind: Pod
+// spec:
+//   containers:
+//     - name: dotnet-sdk
+//       image: mcr.microsoft.com/dotnet/sdk:8.0
+//       command: ["cat"]
+//       tty: true
+//       resources:
+//         requests:
+//           cpu: "200m"
+//           memory: "512Mi"
+//         limits:
+//           cpu: "500m"
+//           memory: "512Mi"
+
+//     - name: kaniko
+//       image: gcr.io/kaniko-project/executor:debug
+//       command: ["/busybox/sh"]
+//       args: ["-c", "while true; do sleep 100; done"]
+//       tty: true
+//       resources:
+//         requests:
+//           cpu: "500m"
+//           memory: "512Mi"
+//         limits:
+//           cpu: "1000m"
+//           memory: "1Gi"
+
+//     - name: trivy
+//       image: ghcr.io/aquasecurity/trivy:0.49.1
+//       command: ["sleep"]
+//       args: ["99d"]
+//       resources:
+//         requests:
+//           cpu: "200m"
+//           memory: "256Mi"
+//         limits:
+//           cpu: "500m"
+//           memory: "512Mi"
+// '''.stripIndent()
+           
+
+
+//         }
+//     }
+    
+//     environment {
+//         // Define any environment variables here
+
+//         DockerHubCredentials = credentials('dockerhub') 
+//         ImageName = 'redasaad123/primnest'
+//         tag = "latest" // You can use a dynamic tag based on the build number or git commit hash
+//         SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
+//         SONAR_ORGANIZATION = 'redasaad123' // Replace with your SonarCloud organization key
+//     }
+
+    
+
+//     stages {
+
+//         stage('Checkout') {
+//             steps {
+                
+//                 git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
+                
+                
+//             }
+//         }
+
+
+//         stage('set up .Net') {
+//             steps {
+//                 echo 'Setting up .net...'
+//                 sh 'dotnet --version' // Check if .NET is installed
+//                 // Add any additional setup commands if needed
+//             }
+//         }
+
+//         stage('Restore') {
+//             steps {
+//                 echo 'Restoring dependencies...'
+//                 sh 'dotnet restore ./PrimeNest/PrimeNest.sln' // Restore .NET dependencies
+//             }
+//         }
+
+//         stage('Build') {
+//             steps {
+//                 echo 'Building...'
+//                 sh 'dotnet build ./PrimeNest/PrimeNest.sln' // Build the .NET solution
+//             }
+            
+//         }
+
+//         stage('Test') {
+//             steps {
+//                 echo 'Testing...'
+//                 sh 'mkdir -p test-results'
+//                 sh 'dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj --no-build --logger "trx;LogFileName=test-results.trx" --results-directory ./test-results'
+//                 archiveArtifacts artifacts: 'test-results/*.trx', fingerprint: true
+//             }
+//         }
+
+//         stage('OWASP Dependency Check') {
+//             steps {
+//                 echo 'Running OWASP Dependency Check...'
+//                 sh 'mkdir -p dependency-check-report'
+//                 dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest', odcInstallation: 'OWASP-Dependency'
+//             }
+//         }
+
+//         stage('Archive OWASP Report') {
+//             steps {
+//                 archiveArtifacts artifacts: 'dependency-check-report/*.html', fingerprint: true
+//             }
+//         }
+
+//         stage('SonarCloud Analysis') {
+//             steps {
+//                 echo 'Running SonarCloud Analysis...'
+//                 withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+//                     sh '''
+//                     export PATH="$PATH:$HOME/.dotnet/tools"
+
+//                     dotnet tool install --global dotnet-sonarscanner || true
+
+//                     dotnet sonarscanner begin \
+//                     /k:"${SONAR_PROJECT_KEY}" \
+//                     /o:"${SONAR_ORGANIZATION}" \
+//                     /d:sonar.host.url="https://sonarcloud.io" \
+//                     /d:sonar.token="${SONAR_TOKEN}"
+
+//                     dotnet build ./PrimeNest/PrimeNest.sln --no-restore
+
+//                     dotnet sonarscanner end /d:sonar.token="${SONAR_TOKEN}"
+//                     '''
+//                 }
+//             }
+//         }
+
+
+
+//         // stage('Build Docker Image') {
+//         //     steps {
+//         //         echo 'Building Docker image...'
+//         //         sh '''
+//         //         nerdctl build -t ${ImageName}:${tag} .
+//         //         ''' 
+//         //     }
+//         // }
+
+//         // stage('Push Docker Image') {
+//         //     steps {
+//         //         echo 'Pushing Docker image to Docker Hub...'
+//         //         sh '''
+//         //         echo "${DockerHubCredentials_Password}" | nerdctl login -u "${DockerHubCredentials_Username}" --password-stdin
+//         //         nerdctl push ${ImageName}:${tag}
+//         //         '''
+//         //     }
+//         // }
+
+//         // stage('kaniko Build and Push') {
+//         //     steps {
+//         //         echo 'Building and pushing Docker image with Kaniko...'
+//         //         sh '''
+//         //         echo "${DockerHubCredentials_Password}" | /kaniko/executor --context . --dockerfile ../Dockerfile --destination ${ImageName}:${tag} --cache=true --cache-repo=${ImageName}-cache
+//         //         '''
+//         //     }
+//         // }
+
+//            stage('Build and Push with Kaniko') {
+//                 steps {
+//                     container('kaniko') {
+//                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+//                             sh '''
+//                             # 1. إنشاء ملف الـ Auth بصيغة JSON التي يفهمها Kaniko
+//                             # نقوم بتحويل اليوزر والباسورد إلى صيغة base64
+//                             AUTH=$(echo -n "${DOCKER_USERNAME}:${DOCKER_PASSWORD}" | base64)
+                            
+//                             echo "{\\"auths\\":{\\"https://index.docker.io/v1/\\":{\\"auth\\":\\"${AUTH}\\"}}}" > /kaniko/.docker/config.json
+                            
+//                             # 2. تشغيل الـ executor مع المسار الصحيح للـ Dockerfile
+//                             # تأكد من مسار الـ Dockerfile (إذا كان في المجلد الرئيسي استخدم ./Dockerfile)
+//                             /kaniko/executor --context . \
+//                                 --dockerfile ./Dockerfile \
+//                                 --destination ${ImageName}:${tag} \
+//                                 --cache=true \
+//                                 --cache-copy-layers \
+//                                 --snapshot-mode=redo \
+//                                 --use-new-run \
+//                                 --cache-repo=${ImageName}-cache
+//                             '''
+//                         }
+//                     }
+//                 }
+//             }
+
+
+//         stage('prepare trivy') {
+//             steps {
+//                 echo 'Preparing for trivy scan...'
+//                 sh '''
+
+//                 mkdir -p trivy-templates
+//                 wget -q https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -O trivy-templates/html.tpl
+//                 '''
+//             }
+//         }
+
+//         stage('Trivy Scan') {
+//             steps {
+//                 echo 'Running Trivy scan...'
+//                 sh '''
+//                 mkdir -p trivy-reports
+//                 trivy image --format template --template "@trivy-templates/html.tpl" -o trivy-reports/trivy-report.html ${ImageName}:${tag}
+//                 '''
+
+//                 archiveArtifacts artifacts: "trivy-*.html", allowEmptyArchive: true
+//             }
+//         }
+
+        
+
+
+//         // stage('Trigger CD Pipeline')
+//         // {
+//         //     steps {
+//         //         echo 'Triggering CD pipeline...'
+//         //         build job: 'jenkinsfile-CD', wait: false
+//         //     }
+//         // }
+
+        
+
+
+
+//     }
+// }
+
+
+
+
+
 pipeline {
-    agent {
-        kubernetes {
-            defaultContainer 'dotnet-sdk'
-            yaml '''
+    agent none
+
+    environment {
+        ImageName = 'redasaad123/primnest'
+        tag = "latest"
+        SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
+        SONAR_ORGANIZATION = 'redasaad123'
+    }
+
+    stages {
+
+        // ===================== BUILD =====================
+        stage('Build') {
+            agent {
+                kubernetes {
+                    yaml '''
 apiVersion: v1
 kind: Pod
 spec:
   containers:
-    - name: dotnet-sdk
-      image: mcr.microsoft.com/dotnet/sdk:8.0
-      command: ["cat"]
-      tty: true
-      resources:
-        requests:
-          cpu: "200m"
-          memory: "512Mi"
-        limits:
-          cpu: "500m"
-          memory: "512Mi"
-
-    - name: kaniko
-      image: gcr.io/kaniko-project/executor:debug
-      command: ["/busybox/sh"]
-      args: ["-c", "while true; do sleep 100; done"]
-      tty: true
-      resources:
-        requests:
-          cpu: "500m"
-          memory: "512Mi"
-        limits:
-          cpu: "1000m"
-          memory: "1Gi"
-
-    - name: trivy
-      image: ghcr.io/aquasecurity/trivy:0.49.1
-      command: ["sleep"]
-      args: ["99d"]
-      resources:
-        requests:
-          cpu: "200m"
-          memory: "256Mi"
-        limits:
-          cpu: "500m"
-          memory: "512Mi"
-'''.stripIndent()
-           
-
-
-        }
-    }
-    
-    environment {
-        // Define any environment variables here
-
-        DockerHubCredentials = credentials('dockerhub') 
-        ImageName = 'redasaad123/primnest'
-        tag = "latest" // You can use a dynamic tag based on the build number or git commit hash
-        SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
-        SONAR_ORGANIZATION = 'redasaad123' // Replace with your SonarCloud organization key
-    }
-
-    
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-                
-                git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
-                
-                
+  - name: dotnet
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    command: ["cat"]
+    tty: true
+'''
+                }
             }
-        }
 
-
-        stage('set up .Net') {
             steps {
-                echo 'Setting up .net...'
-                sh 'dotnet --version' // Check if .NET is installed
-                // Add any additional setup commands if needed
-            }
-        }
+                container('dotnet') {
+                    git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
 
-        stage('Restore') {
-            steps {
-                echo 'Restoring dependencies...'
-                sh 'dotnet restore ./PrimeNest/PrimeNest.sln' // Restore .NET dependencies
-            }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                sh 'dotnet build ./PrimeNest/PrimeNest.sln' // Build the .NET solution
-            }
-            
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                sh 'mkdir -p test-results'
-                sh 'dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj --no-build --logger "trx;LogFileName=test-results.trx" --results-directory ./test-results'
-                archiveArtifacts artifacts: 'test-results/*.trx', fingerprint: true
-            }
-        }
-
-        stage('OWASP Dependency Check') {
-            steps {
-                echo 'Running OWASP Dependency Check...'
-                sh 'mkdir -p dependency-check-report'
-                dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest', odcInstallation: 'OWASP-Dependency'
-            }
-        }
-
-        stage('Archive OWASP Report') {
-            steps {
-                archiveArtifacts artifacts: 'dependency-check-report/*.html', fingerprint: true
-            }
-        }
-
-        stage('SonarCloud Analysis') {
-            steps {
-                echo 'Running SonarCloud Analysis...'
-                withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
                     sh '''
-                    export PATH="$PATH:$HOME/.dotnet/tools"
-
-                    dotnet tool install --global dotnet-sonarscanner || true
-
-                    dotnet sonarscanner begin \
-                    /k:"${SONAR_PROJECT_KEY}" \
-                    /o:"${SONAR_ORGANIZATION}" \
-                    /d:sonar.host.url="https://sonarcloud.io" \
-                    /d:sonar.token="${SONAR_TOKEN}"
-
-                    dotnet build ./PrimeNest/PrimeNest.sln --no-restore
-
-                    dotnet sonarscanner end /d:sonar.token="${SONAR_TOKEN}"
+                    dotnet restore ./PrimeNest/PrimeNest.sln
+                    dotnet build ./PrimeNest/PrimeNest.sln
                     '''
                 }
             }
         }
 
-
-
-        // stage('Build Docker Image') {
-        //     steps {
-        //         echo 'Building Docker image...'
-        //         sh '''
-        //         nerdctl build -t ${ImageName}:${tag} .
-        //         ''' 
-        //     }
-        // }
-
-        // stage('Push Docker Image') {
-        //     steps {
-        //         echo 'Pushing Docker image to Docker Hub...'
-        //         sh '''
-        //         echo "${DockerHubCredentials_Password}" | nerdctl login -u "${DockerHubCredentials_Username}" --password-stdin
-        //         nerdctl push ${ImageName}:${tag}
-        //         '''
-        //     }
-        // }
-
-        // stage('kaniko Build and Push') {
-        //     steps {
-        //         echo 'Building and pushing Docker image with Kaniko...'
-        //         sh '''
-        //         echo "${DockerHubCredentials_Password}" | /kaniko/executor --context . --dockerfile ../Dockerfile --destination ${ImageName}:${tag} --cache=true --cache-repo=${ImageName}-cache
-        //         '''
-        //     }
-        // }
-
-           stage('Build and Push with Kaniko') {
-                steps {
-                    container('kaniko') {
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                            sh '''
-                            # 1. إنشاء ملف الـ Auth بصيغة JSON التي يفهمها Kaniko
-                            # نقوم بتحويل اليوزر والباسورد إلى صيغة base64
-                            AUTH=$(echo -n "${DOCKER_USERNAME}:${DOCKER_PASSWORD}" | base64)
-                            
-                            echo "{\\"auths\\":{\\"https://index.docker.io/v1/\\":{\\"auth\\":\\"${AUTH}\\"}}}" > /kaniko/.docker/config.json
-                            
-                            # 2. تشغيل الـ executor مع المسار الصحيح للـ Dockerfile
-                            # تأكد من مسار الـ Dockerfile (إذا كان في المجلد الرئيسي استخدم ./Dockerfile)
-                            /kaniko/executor --context . \
-                                --dockerfile ./Dockerfile \
-                                --destination ${ImageName}:${tag} \
-                                --cache=true \
-                                --cache-copy-layers \
-                                --snapshot-mode=redo \
-                                --use-new-run \
-                                --cache-repo=${ImageName}-cache
-                            '''
-                        }
-                    }
+        // ===================== TEST =====================
+        stage('Test') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: dotnet
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    command: ["cat"]
+    tty: true
+'''
                 }
             }
 
-
-        stage('prepare trivy') {
             steps {
-                echo 'Preparing for trivy scan...'
-                sh '''
+                container('dotnet') {
+                    sh '''
+                    mkdir -p test-results
 
-                mkdir -p trivy-templates
-                wget -q https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -O trivy-templates/html.tpl
-                '''
+                    dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj \
+                    --no-build \
+                    --logger "trx;LogFileName=test-results.trx" \
+                    --results-directory ./test-results
+                    '''
+
+                    archiveArtifacts artifacts: 'test-results/*.trx', fingerprint: true
+                }
             }
         }
 
+        // ===================== SONAR =====================
+        stage('SonarCloud') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: java
+    image: eclipse-temurin:17-jdk
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
+
+            steps {
+                container('java') {
+                    withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+                        sh '''
+                        dotnet tool install --global dotnet-sonarscanner || true
+                        export PATH="$PATH:$HOME/.dotnet/tools"
+
+                        git clone https://github.com/redasaad123/PrimeNest_End-To-End.git .
+                        dotnet restore ./PrimeNest/PrimeNest.sln
+
+                        dotnet sonarscanner begin \
+                        /k:"PrimeNest_ProjectApi" \
+                        /o:"redasaad123" \
+                        /d:sonar.host.url="https://sonarcloud.io" \
+                        /d:sonar.token="$SONAR_TOKEN"
+
+                        dotnet build ./PrimeNest/PrimeNest.sln
+
+                        dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+                        '''
+                    }
+                }
+            }
+        }
+
+        // ===================== TRIVY =====================
         stage('Trivy Scan') {
-            steps {
-                echo 'Running Trivy scan...'
-                sh '''
-                mkdir -p trivy-reports
-                trivy image --format template --template "@trivy-templates/html.tpl" -o trivy-reports/trivy-report.html ${ImageName}:${tag}
-                '''
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: trivy
+    image: aquasec/trivy:latest
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
 
-                archiveArtifacts artifacts: "trivy-*.html", allowEmptyArchive: true
+            steps {
+                container('trivy') {
+                    sh '''
+                    mkdir -p trivy-reports
+
+                    trivy fs \
+                    --format html \
+                    -o trivy-reports/report.html \
+                    ./PrimeNest
+                    '''
+
+                    archiveArtifacts artifacts: 'trivy-reports/*', allowEmptyArchive: true
+                }
             }
         }
 
-        
+        // ===================== DOCKER BUILD =====================
+        stage('Build & Push Docker (Kaniko)') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
 
+            steps {
+                container('kaniko') {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                        sh '''
+                        AUTH=$(echo -n "$USER:$PASS" | base64)
 
-        // stage('Trigger CD Pipeline')
-        // {
-        //     steps {
-        //         echo 'Triggering CD pipeline...'
-        //         build job: 'jenkinsfile-CD', wait: false
-        //     }
-        // }
+                        echo "{\\"auths\\":{\\"https://index.docker.io/v1/\\":{\\"auth\\":\\"$AUTH\\"}}}" > /kaniko/.docker/config.json
 
-        
-
-
-
+                        /kaniko/executor \
+                        --context . \
+                        --dockerfile ./Dockerfile \
+                        --destination ${ImageName}:${tag} \
+                        --cache=true \
+                        --cache-repo=${ImageName}-cache
+                        '''
+                    }
+                }
+            }
+        }
     }
 }
-

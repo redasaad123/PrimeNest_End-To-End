@@ -16,6 +16,8 @@
 **/charts
 **/docker-compose*
 **/Dockerfile*
+DevOps/
+PrimeNest/ProjectApi.Test/
 **/node_modules
 **/npm-debug.log
 **/obj

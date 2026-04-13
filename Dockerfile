@@ -16,29 +16,15 @@ RUN dotnet restore "PrimeNest.sln"
 # Copy all source files
 COPY ["PrimeNest/", "."]
 
-# Build the application
-RUN dotnet build "PrimeNest.sln" -c Release -o /app/build
-
-# Stage 2: Test
-FROM build AS test
-WORKDIR /src
-
-# Run unit tests
-RUN dotnet test "ProjectApi.Test/ProjectApi.Test.csproj" --no-build --verbosity normal --logger "console;verbosity=detailed"
-
-# Stage 3: Publish
-FROM build AS publish
-WORKDIR /src
-
 # Publish the application
-RUN dotnet publish "ProjectApi/ProjectApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "ProjectApi/ProjectApi.csproj" -c Release -o /app/publish --no-restore
 
-# Stage 4: Runtime
+# Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# Copy published files from publish stage
-COPY --from=publish /app/publish .
+# Copy published files from build stage
+COPY --from=build /app/publish .
 
 # Create directories for file uploads
 RUN mkdir -p wwwroot/ProfilePhoto

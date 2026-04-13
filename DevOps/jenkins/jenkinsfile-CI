@@ -166,6 +166,9 @@ pipeline {
                                 --dockerfile ./Dockerfile \
                                 --destination ${ImageName}:${tag} \
                                 --cache=true \
+                                --cache-copy-layers \
+                                --snapshot-mode=redo \
+                                --use-new-run \
                                 --cache-repo=${ImageName}-cache
                             '''
                         }

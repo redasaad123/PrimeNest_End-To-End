@@ -14,13 +14,13 @@ pipeline {
                 tty: true
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:latest
-                command:[sleep]
-                args:["99d"]
+                command: [sleep]
+                args: ["99d"]
 
               - name: trivy
                 image: aquasec/trivy:latest
-                command:[sleep]
-                args:["99d"]
+                command: [sleep]
+                args: ["99d"]
             """
         }
     }

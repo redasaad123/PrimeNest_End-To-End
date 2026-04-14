@@ -1,90 +1,60 @@
-pipeline{
-    agent none
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: tools
+    image: bitnami/kubectl:1.29
+    command: ["cat"]
+    tty: true
+'''
+        }
+    }
 
     environment {
         jwtKey = credentials('jwtKey')
         connectionString = credentials('connectionString')
     }
-    stages{
-        stage('Checkout') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: dotnet
-    image: mcr.microsoft.com/dotnet/sdk:8.0
-    command: ["cat"]
-    tty: true
-'''
-                }
-            }
 
+    stages {
+
+        stage('Checkout') {
             steps {
-                container('dotnet') {
+                container('tools') {
                     git branch: 'main', url: 'https://github.com/redasaad123/PrimeNest_End-To-End.git'
                 }
             }
         }
 
         stage('Create Secret') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: kubectl
-    image: bitnami/kubectl:latest
-    command: ["cat"]
-    tty: true
-'''
-                }
-            }
             steps {
-                container('kubectl') {
-                    sh'''
-                cat <<EOF > secret.yaml
+                container('tools') {
+                    sh '''
+cat <<EOF > secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-    name: primenest-secret
+  name: primenest-secret
 type: Opaque
-
 stringData:
-    jwt-Key: "${jwtKey}" 
-    connectionString: "${connectionString}"
+  jwt-Key: "${jwtKey}"
+  connectionString: "${connectionString}"
 EOF
 
 kubectl apply -f secret.yaml
-
-                    '''
+'''
                 }
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: kubectl
-    image: bitnami/kubectl:latest
-    command: ["cat"]
-    tty: true
-'''
-                }
-            }
+        stage('Deploy') {
             steps {
-                container('kubectl') {
+                container('tools') {
                     dir('DevOps/K8s') {
-                        sh'''
+                        sh '''
 kubectl apply -f ConfigMap.yml
 kubectl apply -f StorageClass.yaml
 kubectl apply -f pvc.yaml
@@ -93,20 +63,11 @@ kubectl apply -f Services.yaml
 kubectl apply -f ClusterIssuer.yml
 kubectl apply -f Ingress.yaml
 
-                    '''
+kubectl rollout status deployment/primenest
+'''
                     }
                 }
             }
         }
-                
-                
-                
-
-
-
-
-
-        
-        
     }
 }

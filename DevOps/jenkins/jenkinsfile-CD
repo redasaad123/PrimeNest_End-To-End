@@ -7,7 +7,7 @@ kind: Pod
 spec:
   containers:
   - name: tools
-    image: bitnami/kubectl:1.29
+    image: alpine/kubectl:latest
     command: ["cat"]
     tty: true
 '''

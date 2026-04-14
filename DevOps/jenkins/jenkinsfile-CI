@@ -362,7 +362,7 @@ spec:
             }
         }
 
-        ===================== OWASP =====================
+        // ===================== OWASP =====================
         stage('OWASP Dependency Check') {
             agent {
                 kubernetes {

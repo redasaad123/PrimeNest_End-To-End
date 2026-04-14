@@ -495,12 +495,10 @@ spec:
                 container('trivy') {
                     sh '''
                     mkdir -p trivy-reports
-
-                    trivy fs \
-                    --format html \
-                    -o trivy-reports/report.html \
-                    ./PrimeNest
+                    trivy fs --format json -o trivy-reports/report.json ./PrimeNest
                     '''
+
+                   
                 }
 
                 archiveArtifacts artifacts: 'trivy-reports/*', allowEmptyArchive: true

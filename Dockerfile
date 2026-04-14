@@ -23,12 +23,11 @@ COPY --from=build /app/publish .
 RUN mkdir -p wwwroot/ProfilePhoto
 
 # Expose ports
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8000
 
 # Set environment variables
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_URLS=http://+:8000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \

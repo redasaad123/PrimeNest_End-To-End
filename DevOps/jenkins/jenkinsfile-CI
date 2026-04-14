@@ -362,33 +362,33 @@ spec:
             }
         }
 
-        // ===================== OWASP =====================
-//         stage('OWASP Dependency Check') {
-//             agent {
-//                 kubernetes {
-//                     yaml '''
-// apiVersion: v1
-// kind: Pod
-// spec:
-//   containers:
-//   - name: java
-//     image: eclipse-temurin:17-jdk
-//     command: ["cat"]
-//     tty: true
-// '''
-//                 }
-//             }
+        ===================== OWASP =====================
+        stage('OWASP Dependency Check') {
+            agent {
+                kubernetes {
+                    yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: java
+    image: eclipse-temurin:17-jdk
+    command: ["cat"]
+    tty: true
+'''
+                }
+            }
 
-//             steps {
-//                 container('java') {
-//                     echo 'Running OWASP Dependency Check...'
-//                     sh 'mkdir -p dependency-check-report'
-//                     dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest', odcInstallation: 'OWASP-Dependency'
-//                 }
+            steps {
+                container('java') {
+                    echo 'Running OWASP Dependency Check...'
+                    sh 'mkdir -p dependency-check-report'
+                    dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest', odcInstallation: 'OWASP-Dependency'
+                }
 
-//                 archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true
-//             }
-//         }
+                archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true
+            }
+        }
 
         // ===================== SONAR =====================
         stage('SonarCloud Analysis') {

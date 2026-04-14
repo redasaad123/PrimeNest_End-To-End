@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: primenest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: primenest
+  template:
+    metadata:
+      labels:
+        app: primenest
+    spec:
+      containers:
+      - name: primenest
+        image: redasaad123/primnest:latest
+        ports:
+        - containerPort: 8000
+
+        env:
+        - name: jwt__Audience
+          valueFrom:
+            configMapKeyRef:
+              name: primenest-config
+              key: jwt-Audience
+        - name: jwt__Issuers
+          valueFrom:
+            configMapKeyRef:
+              name: primenest-config
+              key: jwt-Issuer
+        - name: jwt__Expire  
+          valueFrom:
+            configMapKeyRef:
+              name: primenest-config
+              key: jwt-Expire
+
+        - name: jwt__Key
+          valueFrom:
+            secretKeyRef:
+              name: primenest-secret
+              key: jwt-Key
+        - name: ConnectionStrings__ProductionConnection
+          valueFrom:
+            secretKeyRef:
+              name: primenest-secret
+              key: connectionString
+
+    volumes:
+      - name: app-storage
+      #   persistentVolumeClaim:
+      #     claimName: primenest-pvc
+        hostPath:
+          path: /home/ubuntu/PrimeNest/uploads
+          type: DirectoryorCreate
+
+      
+       

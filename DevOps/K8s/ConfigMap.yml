@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: primenest-config
+data:
+  jwt-Audience: "https://localhost:7243/"
+  jwt-Issuer: "https://localhost:7243/"  
+  jwt-Expire: "2" 

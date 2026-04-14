@@ -251,7 +251,7 @@ pipeline {
         tag = "latest"
         SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
         SONAR_ORGANIZATION = 'redasaad123'
-
+        DEPENDENCY_CHECK_DATA = "/var/jenkins_home/caches/dependency-check"
         NVD_API_KEY = credentials('nvd-api-key-id')
     }
 
@@ -377,6 +377,16 @@ spec:
     image: eclipse-temurin:17-jdk
     command: ["cat"]
     tty: true
+    volumeMounts:
+    - name: owasp-cache
+      mountPath: /var/jenkins_home/caches
+
+  volumes:
+  - name: owasp-cache
+    hostPath:
+      path: /opt/jenkins-cache
+      type: DirectoryOrCreate
+
 '''
                 }
             }
@@ -385,7 +395,7 @@ spec:
                 container('java') {
                     echo 'Running OWASP Dependency Check...'
                     sh 'mkdir -p dependency-check-report'
-                    dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest --nvdApiKey ${NVD_API_KEY}', odcInstallation: 'OWASP-Dependency'
+                    dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest --data ${DEPENDENCY_CHECK_DATA} --nvdApiKey ${NVD_API_KEY}', odcInstallation: 'OWASP-Dependency'
                 }
 
                 archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true
@@ -506,7 +516,17 @@ spec:
                 archiveArtifacts artifacts: 'trivy-reports/*', allowEmptyArchive: true
             }
         }
+
+
+        stage('Trigger CD Pipeline')
+        {
+            steps {
+                echo 'Triggering CD pipeline...'
+                build job: 'Pipeline-CD', wait: false
+            }
+        }
     }
+    
 }
 
 

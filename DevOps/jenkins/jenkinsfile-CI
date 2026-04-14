@@ -251,6 +251,8 @@ pipeline {
         tag = "latest"
         SONAR_PROJECT_KEY = 'PrimeNest_ProjectApi'
         SONAR_ORGANIZATION = 'redasaad123'
+
+        NVD_API_KEY = credentials('nvd-api-key-id')
     }
 
     stages {
@@ -383,7 +385,7 @@ spec:
                 container('java') {
                     echo 'Running OWASP Dependency Check...'
                     sh 'mkdir -p dependency-check-report'
-                    dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest', odcInstallation: 'OWASP-Dependency'
+                    dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest --nvdApiKey ${NVD_API_KEY}', odcInstallation: 'OWASP-Dependency'
                 }
 
                 archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true

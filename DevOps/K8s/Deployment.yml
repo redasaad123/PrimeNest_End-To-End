@@ -45,14 +45,13 @@ spec:
             secretKeyRef:
               name: primenest-secret
               key: connectionString
-
-    volumes:
+      volumes:
       - name: app-storage
       #   persistentVolumeClaim:
       #     claimName: primenest-pvc
         hostPath:
           path: /home/ubuntu/PrimeNest/uploads
-          type: DirectoryorCreate
+          type: DirectoryOrCreate
 
       
        

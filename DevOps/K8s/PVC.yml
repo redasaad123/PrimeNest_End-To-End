@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: primenest-pvc
 spec:
-  storageClassName: PrimeNestStorageClass
+  storageClassName: primeneststorageclass
   accessModes:
     - ReadWriteOnce
   resources:

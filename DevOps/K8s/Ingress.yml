@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: primenest-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    
     nginx.ingress.kubernetes.io/use-regex: "false"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     cert-manager.io/cluster-issuer: letsencrypt-prod

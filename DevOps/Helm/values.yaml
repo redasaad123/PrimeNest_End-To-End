@@ -1,0 +1,145 @@
+# Default values for Helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ConfigMap:
+  enabled: true
+  name: primenest-config
+  data:
+    jwt-Audience: "https://localhost:7243/"
+    jwt-Issuer: "https://localhost:7243/"  
+    jwt-Expire: "2"
+
+PVC:
+  enabled: true
+  name: primenest-pvc
+  storageClassName: primeneststorageclass
+  accessModes:
+    - ReadWriteOnce
+  storage: 2Gi
+
+StorageClass:
+  enabled: true
+  name: primeneststorageclass
+  provisioner: kubernetes.io/no-provisioner
+  volumeBindingMode: WaitForFirstConsumer
+  parameters:
+  reclaimPolicy: Retain
+
+# This is to override the chart name.
+nameOverride: "primenest"
+fullnameOverride: "primenest"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+replicaCount: 3
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  repository: redasaad123/primnest
+  tag: latest
+
+
+env:
+  - name: jwt__Audience
+    valueFrom:
+      configMapKeyRef:
+        name: primenest-config
+        key: jwt-Audience
+  - name: jwt__Issuers
+    valueFrom:
+      configMapKeyRef:
+        name: primenest-config
+        key: jwt-Issuer
+  - name: jwt__Expire  
+    valueFrom:
+      configMapKeyRef:
+        name: primenest-config
+        key: jwt-Expire
+
+  - name: jwt__Key
+    valueFrom:
+      secretKeyRef:
+        name: primenest-secret
+        key: jwt-Key
+  - name: ConnectionStrings__ProductionConnection
+    valueFrom:
+      secretKeyRef:
+        name: primenest-secret
+        key: connectionString
+
+
+
+
+# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+service:
+
+  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  type: ClusterIP
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  port: 8000
+  targetPort: 8000
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: 
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: primenest.duckdns.org
+      paths: 
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: primenest-service
+              port:
+                number: 8000
+    
+  tls: 
+    - hosts:
+      - primenest.duckdns.org
+      secretName: prime-nest-tls
+
+
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+
+
+# Additional volumes on the output Deployment definition.
+volumes: 
+  - name: app-storage
+    hostPath:
+      path: /home/ubuntu/PrimeNest/uploads
+      type: DirectoryOrCreate
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+  # - name: foo
+  #   mountPath: "/etc/foo"
+  #   readOnly: true
+
+
+ClusterIssuer:
+  enabled: true
+  name: letsencrypt-prod
+  server: https://acme-v02.api.letsencrypt.org/directory
+  email: redasaad010260@gmail.com
+  class: nginx

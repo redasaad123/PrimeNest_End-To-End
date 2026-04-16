@@ -1,0 +1,11 @@
+{{- if .Values.StorageClass.enabled }}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.StorageClass.name | default (include "Helm.fullname" .)}}
+
+provisioner: {{ .Values.StorageClass.provisioner }}
+volumeBindingMode: {{ .Values.StorageClass.volumeBindingMode}}
+reclaimPolicy: {{ .Values.StorageClass.reclaimPolicy }}
+
+{{- end }}

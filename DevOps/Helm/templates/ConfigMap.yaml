@@ -1,0 +1,12 @@
+{{- if .Values.ConfigMap.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.ConfigMap.name | default ( include "Helm.fullname" .)}}
+
+data:
+  jwt-Audience: {{ .Values.ConfigMap.data.jwtAudience | quote }}
+  jwt-Issuer: {{ .Values.ConfigMap.data.jwtIssuer | quote }}
+  jwt-Expire: {{ .Values.ConfigMap.data.jwtExpire | quote}}
+  
+{{- end }}

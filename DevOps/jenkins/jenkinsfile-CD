@@ -57,7 +57,7 @@ kubectl apply -f secret.yaml
 
         stage('Deploy the Application') {
             steps {
-                container('Helm') {
+                container('helm') {
                     dir('DevOps/Helm') {
 //                         sh '''
 // kubectl apply -f ConfigMap.yml

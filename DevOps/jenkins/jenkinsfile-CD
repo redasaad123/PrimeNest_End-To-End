@@ -57,23 +57,23 @@ kubectl apply -f secret.yaml
 
         stage('Deploy the Application') {
             steps {
-                container('tools') {
-                    dir('DevOps/K8s') {
+                container('Helm') {
+                    dir('DevOps/Helm') {
+//                         sh '''
+// kubectl apply -f ConfigMap.yml
+//         kubectl apply -f StorageClass.yml
+//         kubectl apply -f PVC.yml
+//         kubectl apply -f Deployment.yml
+//         kubectl apply -f Services.yml
+// kubectl apply -f ClusterIssuer.yml
+//         kubectl apply -f Ingress.yml
+
+// kubectl rollout status deployment/primenest
+// '''
+
                         sh '''
-kubectl apply -f ConfigMap.yml
-        kubectl apply -f StorageClass.yml
-        kubectl apply -f PVC.yml
-        kubectl apply -f Deployment.yml
-        kubectl apply -f Services.yml
-kubectl apply -f ClusterIssuer.yml
-        kubectl apply -f Ingress.yml
-
-kubectl rollout status deployment/primenest
-'''
-
-                        // sh '''
-                        // helm upgrade --install primenest . 
-                        // '''
+                        helm upgrade --install primenest . 
+                        '''
                     }
                 }
             }

@@ -11,6 +11,10 @@ spec:
     image: alpine/kubectl:latest
     command: ["cat"]
     tty: true
+  - name: helm
+    image: alpine/helm:latest
+    command: ["cat"]
+    tty: true
 '''
         }
     }
@@ -53,7 +57,7 @@ kubectl apply -f secret.yaml
 
         stage('Deploy the Application') {
             steps {
-                container('tools') {
+                container('helm') {
                     dir('DevOps/Helm') {
 //                         sh '''
 // // kubectl apply -f ConfigMap.yml

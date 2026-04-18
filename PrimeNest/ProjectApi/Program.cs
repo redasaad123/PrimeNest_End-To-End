@@ -121,6 +121,7 @@ namespace ProjectApi
             var app = builder.Build();
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseRouting();
             // app.UseHttpsRedirection();
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpMetrics();

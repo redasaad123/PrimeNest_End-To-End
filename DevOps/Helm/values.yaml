@@ -88,16 +88,20 @@ ingress:
   enabled: true
   className: "nginx"
   annotations: 
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header X-Forwarded-Proto https;
-      proxy_set_header X-Forwarded-Port 443;
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # إضافة السطر التالي للتأكد من تمرير المسار كما هو
+    nginx.ingress.kubernetes.io/use-regex: "true"
   hosts:
     - host: primenest.duckdns.org
       paths: 
+        - path: /metrics
+          pathType: Exact
         - path: /
           pathType: Prefix
+        
   port: 8000
     
   tls: 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj": {}
+    "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\Core.csproj": {}
   },
   "projects": {
-    "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj": {
+    "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj",
+        "projectUniqueName": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj",
+        "projectPath": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Reda Saad\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects Of C#\\PrimeNest\\Core\\obj\\",
+        "outputPath": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

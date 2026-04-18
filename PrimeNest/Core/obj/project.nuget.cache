@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RLsqpR+n3uY=",
+  "dgSpecHash": "V8k1VQVwjPA=",
   "success": true,
-  "projectFilePath": "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj",
+  "projectFilePath": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Reda Saad\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Reda Saad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.0\\microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",

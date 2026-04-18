@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -63,10 +67,6 @@
       "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\chainofresponsibility\\typefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects devops\\projects\\primenest\\primenest\\projectapi\\controllers\\authenticatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\controllers\\authenticatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -82,17 +82,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "SearchService.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Services\\SearchService.cs",
               "RelativeDocumentMoniker": "ProjectApi\\Services\\SearchService.cs",
               "ToolTip": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Services\\SearchService.cs",
               "RelativeToolTip": "ProjectApi\\Services\\SearchService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-24T22:55:49.505Z",
               "IsPinned": true,
@@ -100,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "LocationFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\LocationFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\LocationFilter.cs",
@@ -126,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "PriceFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\PriceFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\PriceFilter.cs",
@@ -139,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "KeywordFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\KeywordFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\KeywordFilter.cs",
@@ -152,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "DateFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\DateFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\DateFilter.cs",
@@ -165,7 +165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AreaFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\AreaFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\AreaFilter.cs",
@@ -178,7 +178,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "PropertyFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\PropertyFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\PropertyFilter.cs",
@@ -191,7 +191,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "TypeContractFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\TypeContractFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\TypeContractFilter.cs",
@@ -204,7 +204,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Program.cs",
+              "RelativeDocumentMoniker": "ProjectApi\\Program.cs",
+              "ToolTip": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Program.cs",
+              "RelativeToolTip": "ProjectApi\\Program.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAwwIEAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T14:12:25.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "TypeFilter.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ChainOfResponsibility\\TypeFilter.cs",
               "RelativeDocumentMoniker": "ProjectApi\\ChainOfResponsibility\\TypeFilter.cs",
@@ -217,7 +230,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ImageService.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Services\\ImageService.cs",
               "RelativeDocumentMoniker": "ProjectApi\\Services\\ImageService.cs",
@@ -230,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "PropertyServices.cs",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Services\\PropertyServices.cs",
               "RelativeDocumentMoniker": "ProjectApi\\Services\\PropertyServices.cs",
@@ -243,7 +256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Core.csproj",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Core\\Core.csproj",
               "RelativeDocumentMoniker": "Core\\Core.csproj",
@@ -269,7 +282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ProjectApi.csproj",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\ProjectApi.csproj",
               "RelativeDocumentMoniker": "ProjectApi\\ProjectApi.csproj",
@@ -282,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Infrastructure.csproj",
               "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\Infrastructure\\Infrastructure.csproj",
               "RelativeDocumentMoniker": "Infrastructure\\Infrastructure.csproj",
@@ -304,19 +317,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T14:13:56.206Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Program.cs",
-              "RelativeDocumentMoniker": "ProjectApi\\Program.cs",
-              "ToolTip": "D:\\Projects DevOps\\Projects\\PrimeNest\\PrimeNest\\ProjectApi\\Program.cs",
-              "RelativeToolTip": "ProjectApi\\Program.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAwwIMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T14:12:25.974Z",
               "EditorCaption": ""
             }
           ]

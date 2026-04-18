@@ -119,17 +119,27 @@ namespace ProjectApi
             });
 
             var app = builder.Build();
+
             app.UseSwagger();
             app.UseSwaggerUI();
+
             app.UseRouting();
-            // app.UseHttpsRedirection();
+
+            // تأكد من وضع UseHttpMetrics بعد UseRouting
+            app.UseHttpMetrics(); 
+
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-            app.UseHttpMetrics();
-            app.UseMetricServer(url: "/metrics");
+
             app.UseAuthentication();
             app.UseAuthorization();
-            app.MapControllers();
-            // app.MapMetrics();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                // هذا هو الخيار الأفضل والأنسب للعمل مع Kubernetes Ingress
+                endpoints.MapMetrics(); 
+            });
+
             app.Run();
         }
     }

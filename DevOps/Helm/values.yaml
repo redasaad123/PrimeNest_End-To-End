@@ -6,8 +6,8 @@ ConfigMap:
   enabled: true
   name: primenest-config
   data:
-    jwtAudience: "https://localhost:7243/"
-    jwtIssuer: "https://localhost:7243/"  
+    jwtAudience: "https://primenest.duckdns.org/"
+    jwtIssuer: "https://primenest.duckdns.org/"  
     jwtExpire: "2"
 
 PVC:

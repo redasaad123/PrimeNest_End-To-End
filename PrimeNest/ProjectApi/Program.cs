@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using ProjectApi.Servises;
+using Prometheus;
 
 namespace ProjectApi
 {
@@ -122,9 +123,11 @@ namespace ProjectApi
             app.UseSwaggerUI();
             app.UseHttpsRedirection();
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseHttpMetrics();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
+            app.MapMetrics();
             app.Run();
         }
     }

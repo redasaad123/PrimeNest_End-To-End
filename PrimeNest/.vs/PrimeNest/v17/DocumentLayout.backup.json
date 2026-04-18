@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Projects Of C#\\PrimeNest\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{633FD41B-D9C2-4225-B4AE-C3B9CC731F57}|Core\\Core.csproj|d:\\projects of c#\\primenest\\core\\core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{633FD41B-D9C2-4225-B4AE-C3B9CC731F57}|Core\\Core.csproj|solutionrelative:core\\core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|solutionrelative:projectapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{52487AA0-41BC-4838-BE82-917F609B908F}|ProjectApi\\ProjectApi.csproj|d:\\projects of c#\\primenest\\projectapi\\services\\propertyservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,11 +82,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SearchService.cs",
               "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\SearchService.cs",
               "RelativeDocumentMoniker": "ProjectApi\\Services\\SearchService.cs",
@@ -95,12 +95,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-24T22:55:49.505Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ImageService.cs",
               "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\Services\\ImageService.cs",
               "RelativeDocumentMoniker": "ProjectApi\\Services\\ImageService.cs",
@@ -209,13 +208,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\appsettings.json",
               "RelativeDocumentMoniker": "ProjectApi\\appsettings.json",
               "ToolTip": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\appsettings.json",
               "RelativeToolTip": "ProjectApi\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-06-28T14:13:03.545Z",
               "EditorCaption": ""
@@ -234,7 +233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Core.csproj",
               "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\Core\\Core.csproj",
               "RelativeDocumentMoniker": "Core\\Core.csproj",
@@ -242,8 +241,7 @@
               "RelativeToolTip": "Core\\Core.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-18T20:26:45.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-18T20:26:45.039Z"
             },
             {
               "$type": "Document",
@@ -259,7 +257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ProjectApi.csproj",
               "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\ProjectApi\\ProjectApi.csproj",
               "RelativeDocumentMoniker": "ProjectApi\\ProjectApi.csproj",
@@ -267,12 +265,11 @@
               "RelativeToolTip": "ProjectApi\\ProjectApi.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-18T20:24:06.521Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-18T20:24:06.521Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Infrastructure.csproj",
               "DocumentMoniker": "D:\\Projects Of C#\\PrimeNest\\Infrastructure\\Infrastructure.csproj",
               "RelativeDocumentMoniker": "Infrastructure\\Infrastructure.csproj",
@@ -280,8 +277,7 @@
               "RelativeToolTip": "Infrastructure\\Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-18T20:19:40.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-18T20:19:40.216Z"
             },
             {
               "$type": "Document",

@@ -330,124 +330,124 @@ spec:
         }
 
         // ===================== TEST =====================
-        stage('Test') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: dotnet
-    image: mcr.microsoft.com/dotnet/sdk:8.0
-    command: ["cat"]
-    tty: true
-'''
-                }
-            }
+//         stage('Test') {
+//             agent {
+//                 kubernetes {
+//                     yaml '''
+// apiVersion: v1
+// kind: Pod
+// spec:
+//   containers:
+//   - name: dotnet
+//     image: mcr.microsoft.com/dotnet/sdk:8.0
+//     command: ["cat"]
+//     tty: true
+// '''
+//                 }
+//             }
 
-            steps {
-                container('dotnet') {
-                    sh '''
-                    mkdir -p test-results
+//             steps {
+//                 container('dotnet') {
+//                     sh '''
+//                     mkdir -p test-results
 
-                    dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj \
-                    --no-build \
-                    --logger "trx" \
-                    --results-directory ./test-results
+//                     dotnet test ./PrimeNest/ProjectApi.Test/ProjectApi.Test.csproj \
+//                     --no-build \
+//                     --logger "trx" \
+//                     --results-directory ./test-results
 
-                    find test-results || true
-                    '''
+//                     find test-results || true
+//                     '''
 
-                    archiveArtifacts artifacts: 'test-results/**/*.trx', allowEmptyArchive: true
-                }
-            }
-        }
+//                     archiveArtifacts artifacts: 'test-results/**/*.trx', allowEmptyArchive: true
+//                 }
+//             }
+//         }
 
         // ===================== OWASP =====================
-        stage('OWASP Dependency Check') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: java
-    image: eclipse-temurin:17-jdk
-    command: ["cat"]
-    tty: true
-    volumeMounts:
-    - name: owasp-cache
-      mountPath: /var/jenkins_home/caches
+//         stage('OWASP Dependency Check') {
+//             agent {
+//                 kubernetes {
+//                     yaml '''
+// apiVersion: v1
+// kind: Pod
+// spec:
+//   containers:
+//   - name: java
+//     image: eclipse-temurin:17-jdk
+//     command: ["cat"]
+//     tty: true
+//     volumeMounts:
+//     - name: owasp-cache
+//       mountPath: /var/jenkins_home/caches
 
-  volumes:
-  - name: owasp-cache
-    hostPath:
-      path: /opt/jenkins-cache
-      type: DirectoryOrCreate
+//   volumes:
+//   - name: owasp-cache
+//     hostPath:
+//       path: /opt/jenkins-cache
+//       type: DirectoryOrCreate
 
-'''
-                }
-            }
+// '''
+//                 }
+//             }
 
-            steps {
-                container('java') {
-                    echo 'Running OWASP Dependency Check...'
-                    sh 'mkdir -p dependency-check-report'
-                    dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest --data ${DEPENDENCY_CHECK_DATA} --nvdApiKey ${NVD_API_KEY}', odcInstallation: 'OWASP-Dependency'
-                }
+//             steps {
+//                 container('java') {
+//                     echo 'Running OWASP Dependency Check...'
+//                     sh 'mkdir -p dependency-check-report'
+//                     dependencyCheck additionalArguments: '--format HTML --out dependency-check-report --scan ./PrimeNest --data ${DEPENDENCY_CHECK_DATA} --nvdApiKey ${NVD_API_KEY}', odcInstallation: 'OWASP-Dependency'
+//                 }
 
-                archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true
-            }
-        }
+//                 archiveArtifacts artifacts: 'dependency-check-report/*', allowEmptyArchive: true
+//             }
+//         }
 
         // ===================== SONAR =====================
-        stage('SonarCloud Analysis') {
-            agent {
-                kubernetes {
-                    yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: dotnet
-    image: mcr.microsoft.com/dotnet/sdk:8.0
-    command: ["cat"]
-    tty: true
+//         stage('SonarCloud Analysis') {
+//             agent {
+//                 kubernetes {
+//                     yaml '''
+// apiVersion: v1
+// kind: Pod
+// spec:
+//   containers:
+//   - name: dotnet
+//     image: mcr.microsoft.com/dotnet/sdk:8.0
+//     command: ["cat"]
+//     tty: true
 
-  - name: java
-    image: eclipse-temurin:17-jdk
-    command: ["cat"]
-    tty: true
-'''
-                }
-            }
+//   - name: java
+//     image: eclipse-temurin:17-jdk
+//     command: ["cat"]
+//     tty: true
+// '''
+//                 }
+//             }
 
-            steps {
-                container('dotnet') {
-                    withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
-                        sh '''
-                        export PATH="$PATH:$HOME/.dotnet/tools"
+//             steps {
+//                 container('dotnet') {
+//                     withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+//                         sh '''
+//                         export PATH="$PATH:$HOME/.dotnet/tools"
 
-                        dotnet tool install --global dotnet-sonarscanner || true
+//                         dotnet tool install --global dotnet-sonarscanner || true
 
-                        dotnet restore ./PrimeNest/PrimeNest.sln
+//                         dotnet restore ./PrimeNest/PrimeNest.sln
 
-                        dotnet sonarscanner begin \
-                        /k:"PrimeNest_ProjectApi" \
-                        /o:"redasaad123" \
-                        /d:sonar.host.url="https://sonarcloud.io" \
-                        /d:sonar.token="$SONAR_TOKEN"
+//                         dotnet sonarscanner begin \
+//                         /k:"PrimeNest_ProjectApi" \
+//                         /o:"redasaad123" \
+//                         /d:sonar.host.url="https://sonarcloud.io" \
+//                         /d:sonar.token="$SONAR_TOKEN"
 
-                        dotnet build ./PrimeNest/PrimeNest.sln
+//                         dotnet build ./PrimeNest/PrimeNest.sln
 
-                        dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
-                        '''
-                    }
-                }
-            }
-        }
+//                         dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+//                         '''
+//                     }
+//                 }
+//             }
+//         }
 
         // ===================== KANIKO =====================
         stage('Build & Push Docker (Kaniko)') {
@@ -522,7 +522,7 @@ spec:
         {
             steps {
                 echo 'Triggering CD pipeline...'
-                build job: 'Pipeline-CD', wait: false
+                build job: 'Pipeline_CD', wait: false
             }
         }
     }

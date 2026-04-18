@@ -125,10 +125,11 @@ namespace ProjectApi
             // app.UseHttpsRedirection();
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpMetrics();
+            app.UseMetricServer();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
-            app.MapMetrics();
+            // app.MapMetrics();
             app.Run();
         }
     }
